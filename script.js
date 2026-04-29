@@ -151,8 +151,8 @@ const GALLERY = [
   { src: "imagens/Cliente14.jpeg", label: "Cliente 14", sub: "Espaco reservado" },
   { src: "imagens/Cliente15.jpeg", label: "Cliente 15", sub: "Espaco reservado" },
   { src: "imagens/Cliente16.jpeg", label: "Cliente 16", sub: "Espaco reservado" },
-  { src: "imagens/Cliente17.jpeg", label: "Cliente 17", sub: "Espaco reservado" },
-  { src: "imagens/Cliente18.jpeg", label: "Cliente 18", sub: "Espaco reservado" }
+  { src: "imagens/Cliente11.jpeg", label: "Cliente 17", sub: "Espaco reservado" },
+  { src: "imagens/Cliente9.jpeg", label: "Cliente 18", sub: "Espaco reservado" }
 ];
 
 let gPage = 0;
