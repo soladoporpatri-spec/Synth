@@ -1,4 +1,4 @@
-const WHATS = "556286315534";
+﻿const WHATS = "556286315534";
 const DISCORD = "https://discord.gg/6PHtcCVzQ8";
 const loader = document.getElementById("siteLoader");
 const loaderBar = document.getElementById("loaderBar");
@@ -141,18 +141,18 @@ const GALLERY = [
   { src: "imagens/Cliente4.jpeg", label: "Mat.", sub: "Sem stuttering · máximo desempenho" },
   { src: "imagens/Cliente5.jpeg", label: "Doiselle.", sub: "" },
   { src: "imagens/Cliente6.jpeg", label: "Deliquente dc", sub: "+250 FPS" },
-  { src: "imagens/Cliente7.jpeg", label: "Cliente 7", sub: "Espaco reservado" },
-  { src: "imagens/Cliente8.jpeg", label: "Cliente 8", sub: "Espaco reservado" },
-  { src: "imagens/Cliente9.jpeg", label: "Cliente 9", sub: "Espaco reservado" },
-  { src: "imagens/Cliente10.jpeg", label: "Cliente 10", sub: "Espaco reservado" },
-  { src: "imagens/Cliente11.jpeg", label: "Cliente 11", sub: "Espaco reservado" },
-  { src: "imagens/Cliente12.jpeg", label: "Cliente 12", sub: "Espaco reservado" },
-  { src: "imagens/Cliente13.jpeg", label: "Cliente 13", sub: "Espaco reservado" },
-  { src: "imagens/Cliente14.jpeg", label: "Cliente 14", sub: "Espaco reservado" },
-  { src: "imagens/Cliente15.jpeg", label: "Cliente 15", sub: "Espaco reservado" },
-  { src: "imagens/Cliente16.jpeg", label: "Cliente 16", sub: "Espaco reservado" },
-  { src: "imagens/Cliente11.jpeg", label: "Cliente 17", sub: "Espaco reservado" },
-  { src: "imagens/Cliente9.jpeg", label: "Cliente 18", sub: "Espaco reservado" }
+  { src: "imagens/Cliente7.jpeg", label: "VITOR", sub: "Otimizou console" },
+  { src: "imagens/Cliente8.jpeg", label: "Vamp", sub: "sem stuttering +150fps" },
+  { src: "imagens/Cliente9.jpeg", label: "Yang Rinox", sub: "+Estabilidade +fps" },
+  { src: "imagens/Cliente10.jpeg", label: "Leornado", sub: "estabilidade +240" },
+  { src: "imagens/Cliente11.jpeg", label: "YanCardoso", sub: "Estabilidade +fps" },
+  { src: "imagens/Cliente12.jpeg", label: "araujo", sub: "+210fps" },
+  { src: "imagens/Cliente13.jpeg", label: "GREEN", sub: "Otimizou Console" },
+  { src: "imagens/Cliente14.jpeg", label: "Subs", sub: "estabilidade zero input" },
+  { src: "imagens/Cliente15.jpeg", label: "biel7zzx", sub: "Input lag + estabilidade" },
+  { src: "imagens/Cliente16.jpeg", label: "7mathias the best", sub: "+300FPS -input lag" },
+  { src: "imagens/Cliente9.jpeg", label: "Yang Rinox", sub: "+Estabilidade +fps" },
+  { src: "imagens/Cliente11.jpeg", label: "YanCardoso", sub: "Estabilidade +fps" }
 ];
 
 let gPage = 0;
@@ -319,22 +319,17 @@ window.addEventListener("keydown", (e) => {
 });
 
 const FAQS = [
-  { q: "Isso pode danificar meu PC?", a: "N&atilde;o. A otimiza&ccedil;&atilde;o &eacute; feita com ajustes seguros de sistema, energia, rede, drivers e configura&ccedil;&otilde;es. O foco &eacute; desempenho com estabilidade, sem for&ccedil;ar o PC al&eacute;m do que ele suporta." },
-  { q: "Perco arquivos?", a: "N&atilde;o. Seus arquivos pessoais n&atilde;o s&atilde;o apagados. O trabalho &eacute; feito nas configura&ccedil;&otilde;es do sistema e, quando alguma limpeza for necess&aacute;ria, ela &eacute; feita com cuidado." },
-  { q: "Preciso formatar?", a: "Na maioria dos casos, n&atilde;o. A formata&ccedil;&atilde;o s&oacute; &eacute; recomendada quando o Windows est&aacute; muito pesado, corrompido ou cheio de problemas. Se for necess&aacute;rio, isso &eacute; conversado antes." },
-  { q: "Quanto FPS posso ganhar?", a: "Depende do seu hardware, do jogo e do estado atual do Windows. Alguns PCs ganham poucos FPS, outros ganham muito mais; al&eacute;m do FPS, a otimiza&ccedil;&atilde;o costuma melhorar travamentos, delay e estabilidade." },
-  { q: "Funciona em notebook?", a: "Sim. A otimiza&ccedil;&atilde;o tamb&eacute;m funciona em notebook gamer ou notebook comum, respeitando os limites de temperatura, energia e hardware do aparelho." },
-  { q: "Posso acompanhar tudo ao vivo?", a: "Sim. No atendimento remoto voc&ecirc; pode acompanhar tudo pela tela, tirar d&uacute;vidas e ver o que est&aacute; sendo ajustado durante o processo." },
-  { q: "E se eu n&atilde;o gostar do resultado?", a: "Se algo n&atilde;o ficar do jeito que voc&ecirc; esperava, eu reviso os ajustes com voc&ecirc; e fa&ccedil;o as corre&ccedil;&otilde;es necess&aacute;rias para deixar o PC est&aacute;vel e confort&aacute;vel para jogar." },
-  { q: "Como funciona o processo de otimização?", a: "Você me envia acesso remoto via AnyDesk ou TeamViewer. Faço todas as configurações em 1 a 2h, e você sente a diferença na hora, sem precisar sair de casa." },
-  { q: "Preciso reinstalar o Windows?", a: "Não necessariamente. PRO e ELITE funcionam no Windows atual. A PREMIUM inclui opcionalmente reinstalação com uma versão mais leve e otimizada." },
-  { q: "Meu PC pode ficar instável depois?", a: "Não. Todas as otimizações focam em liberar desempenho sem comprometer a estabilidade. A maioria dos clientes reporta o sistema mais estável do que antes." },
-  { q: "Qual é o prazo de entrega?", a: "Normalmente no mesmo dia do contato. Combinamos um horário e fazemos tudo remotamente." },
-  { q: "De quanto em quanto tempo posso otimizar novamente?", a: "Recomendo otimizar a cada 3-6 meses para manter o desempenho, mas isso pode variar dependendo do uso e atualizações do sistema." },
-  { q: "Como funciona o pagamento?", a: "Pagamento via Pix e cartão de crédito durante a otimização. Rápido e sem complicação." }
-];
-
-const faqEl = document.getElementById("faqs");
+  { q: "Isso pode danificar meu PC?", a: "Não. A otimização é feita com ajustes seguros de sistema, energia, rede, drivers e configurações. O foco é desempenho com estabilidade, sem forçar o PC além do que ele suporta." },
+  { q: "Perco arquivos pessoais?", a: "Não. Seus arquivos pessoais não são apagados. O trabalho é feito nas configurações do sistema e, quando alguma limpeza for necessária, ela é feita com cuidado." },
+  { q: "Preciso formatar?", a: "Na maioria dos casos, não. A formatação só é recomendada quando o Windows está muito pesado, corrompido ou cheio de problemas. Se for necessário, isso é conversado antes." },
+  { q: "Quanto FPS posso ganhar?", a: "Depende do seu hardware, do jogo e do estado atual do Windows. Além do FPS, a otimização costuma melhorar travamentos, delay, estabilidade e tempo de resposta." },
+  { q: "Funciona em notebook?", a: "Sim. A otimização também funciona em notebook gamer ou notebook comum, respeitando os limites de temperatura, energia e hardware do aparelho." },
+  { q: "Posso acompanhar tudo ao vivo?", a: "Sim. No atendimento remoto você pode acompanhar tudo pela tela, tirar dúvidas e ver o que está sendo ajustado durante o processo." },
+  { q: "Tem suporte depois da otimização?", a: "Sim. Se algo não ficar do jeito que você esperava, reviso os ajustes com você e faço as correções necessárias para deixar o PC estável e confortável para jogar." },
+  { q: "Como funciona o pagamento?", a: "O pagamento pode ser feito via Pix ou cartão. No WhatsApp eu confirmo o plano, o valor e o melhor horário antes de iniciar o atendimento." },
+  { q: "Qual é o prazo de entrega?", a: "Normalmente no mesmo dia do contato. Combinamos um horário e fazemos tudo remotamente em cerca de 1 a 2 horas, dependendo do plano e do estado do PC." },
+  { q: "De quanto em quanto tempo posso otimizar novamente?", a: "Recomendo revisar a otimização a cada 3 a 6 meses, principalmente depois de muitas atualizações do Windows, drivers ou jogos." }
+];const faqEl = document.getElementById("faqs");
 FAQS.forEach((f) => {
   const d = document.createElement("div");
   d.className = "faqitem";
@@ -344,7 +339,7 @@ FAQS.forEach((f) => {
 });
 
 function setupRevealAnimations() {
-  const targets = document.querySelectorAll(".hero,.pain-banner,.sec,.console-banner,.cards-grid,.process,.diff-grid,.gallery,.faqs,.cta-wrap,footer");
+  const targets = document.querySelectorAll(".hero,.pain-banner,.sec,.console-banner,.cards-grid,.process,.assurance-grid,.diff-grid,.depos,.gallery,.faqs,.cta-wrap,footer");
   targets.forEach((el) => {
     el.classList.add("reveal");
   });

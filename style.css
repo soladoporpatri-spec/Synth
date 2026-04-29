@@ -72,7 +72,7 @@ nav{
   position:sticky;top:10px;z-index:5;
 }
 .nav-logo{display:flex;align-items:center;gap:8px}
-.nav-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--pro)}
+.nav-logo-img{width:22px;height:22px;border-radius:6px;object-fit:cover;display:block}
 .nav-logo-txt{font-size:15px;font-weight:700;color:var(--pro);letter-spacing:-.3px}
 .nav-links{display:flex;gap:20px}
 .nav-links a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s;cursor:pointer}
@@ -123,6 +123,12 @@ nav{
 .hero-sub{font-size:15px;color:var(--muted);margin-bottom:8px;font-weight:500}
 .hero-p{font-size:13px;color:var(--muted2);max-width:400px;margin:0 auto 28px;line-height:1.7}
 .hero-btns{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.trust-row{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:-20px 0 30px}
+.trust-pill{
+  padding:7px 11px;border-radius:999px;
+  background:rgba(255,255,255,.035);border:0.5px solid var(--border);
+  color:rgba(221,216,240,.72);font-size:11px;font-weight:600;
+}
 .hbtn-main{
   padding:13px 28px;background:var(--pro);color:#1a0a40;
   border:none;border-radius:12px;font-weight:700;font-size:14px;
@@ -435,6 +441,24 @@ nav{
 .ptitle{font-size:12px;font-weight:600;color:var(--text);margin-bottom:5px}
 .pdesc{font-size:11px;color:var(--muted);line-height:1.6}
 
+/* SEGURANCA */
+.assurance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px}
+.assurance-card{
+  background:linear-gradient(180deg,rgba(18,15,32,.98),rgba(14,12,26,.92));
+  border:0.5px solid var(--border);border-radius:14px;padding:18px;
+  display:flex;flex-direction:column;gap:8px;
+  transition:border-color .2s,transform .2s;
+}
+.assurance-card:hover{border-color:rgba(167,139,250,.35);transform:translateY(-2px)}
+.assurance-icon{
+  width:32px;height:32px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--pro-dim);border:0.5px solid rgba(167,139,250,.3);
+  color:var(--pro);font-weight:900;font-size:15px;
+}
+.assurance-title{font-size:14px;font-weight:700;color:var(--text)}
+.assurance-card p{font-size:11.5px;color:var(--muted);line-height:1.7}
+
 /* DIFERENCIAIS */
 .diff-grid{
   display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;
@@ -533,7 +557,7 @@ footer{
   .pain-actions .hbtn-main,.pain-actions .hbtn-sec{width:100%;justify-content:center}
   .console-banner{padding:20px;gap:18px}
   .console-name{font-size:30px}
-  .cards-grid,.depos,.outros,.process,.diff-grid{grid-template-columns:1fr}
+  .cards-grid,.depos,.outros,.process,.diff-grid,.assurance-grid{grid-template-columns:1fr}
   .gitem{flex:0 0 calc((100% - 12px)/2)}
   .gmodal{padding:14px;gap:8px}
   .gmodal-card{height:78vh}
@@ -549,7 +573,7 @@ footer{
   .nav-logo-txt{font-size:13px}
   .nav-cta{padding:7px 10px}
   .hbtn-main,.hbtn-sec,.hbtn-discord,.cta-btn{width:100%;justify-content:center}
-  .card:hover,.console-banner:hover,.diff-card:hover,.pstep:hover{transform:none}
+  .card:hover,.console-banner:hover,.diff-card:hover,.pstep:hover,.assurance-card:hover{transform:none}
   .reveal{opacity:1;transform:none;transition:none}
 }
 
