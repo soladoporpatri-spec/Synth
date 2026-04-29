@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synth Otimização</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="imagens/favicon-32x32.png" type="image/png">
+</head>
+<body class="loading">
+  <div class="site-loader" id="siteLoader" aria-live="polite">
+    <div class="loader-panel">
+      <div class="loader-mark"><span></span></div>
+      <div class="loader-brand">Synth Optimizer</div>
+      <div class="loader-text" id="loaderText">Preparando otimiza&ccedil;&atilde;o...</div>
+      <div class="loader-bar"><span id="loaderBar"></span></div>
+    </div>
+  </div>
+  <canvas id="bg-canvas"></canvas>
+<div class="w">
+
+<nav>
+  <div class="nav-logo"><div class="nav-logo-dot"></div><span class="nav-logo-txt">Synth Optimizer</span></div>
+  <div class="nav-links">
+    <a href="#planos">Planos</a><a href="#diferencial">Diferencial</a><a href="#resultados">Resultados</a><a href="#faq">FAQ</a>
+  </div>
+  <div class="nav-cta" onclick="openWhats('','')">Falar no WhatsApp</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-lines"></div>
+  <div class="hero-orb"></div>
+  <div class="hero-badge"><div class="badge-pulse"></div>Otimização profissional de PC</div>
+  <h1>Seu PC no limite.<br><span>Sem trocar peças.</span></h1>
+  <div class="hero-sub">Mais FPS. Menos travamentos. Resposta instantânea.</div>
+  <p class="hero-p">Otimizações remotas de alto nível para jogadores que querem extrair o máximo do hardware.</p>
+  <div class="hero-btns">
+    <button class="hbtn-main" onclick="document.getElementById('planos').scrollIntoView({behavior:'smooth'})">Ver planos</button>
+    <button class="hbtn-sec" onclick="openWhats('','R$10,99')">Falar comigo</button>
+    <button class="hbtn-discord" onclick="openDiscord()" aria-label="Entrar no Discord">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.317 4.369A19.791 19.791 0 0 0 15.558 2.9a13.811 13.811 0 0 0-.609 1.253 18.27 18.27 0 0 0-5.498 0A12.64 12.64 0 0 0 8.833 2.9a19.736 19.736 0 0 0-4.765 1.471C1.052 8.918.235 13.356.644 17.73a19.93 19.93 0 0 0 5.84 2.97 14.997 14.997 0 0 0 1.252-2.038_12.98_12.98_0_0_1-1.97-.947c.165-.122.327-.248.482-.377a14.14_14.14_0_0_0_11.905_0c.１５８．１３．３２．２５５．４８２．３７７－．６３．３７４－１．２９．６９１－１．９７２．９４８．３６．７１４．７８　１．３９６　１．２５２　２．０３７ａ１９．８７６　１９．８７６　０　０　０　５．８４４－２．９７ｃ．４８－５．０７－．８１９－９．４６８－３．４４２－１３．３６１ＺＭ８．０２　１５．０４２ｃ－１．１４　０－２．０７３－１．０６１－２．０７３－２．３６５　０－１．３０４　０\\.９１５－２\\.３６５　２\\.０７３－２\\.３６５　１\\.１６５　０　２\\.０９２　１\\.０７　２\\.０７３　２\\.３６５　０　１\\.３０４－\\.９１５　２\\.３６５－２\\.０７３　２\\.３６５Ｚｍ７\\.９６　０ｃ－１\\.１４　０－２\\.０７３－１\\.０６１－２\\.₀₇₃−₂·₃₆₅　₀−₁·₃₀₄　₀·₉₁₅−₂·₃₆₅　₂·₀₇₃−₂·₃₆₅　₁·₁₆₅　₀　₂·₀₉₂　₁·₀₇　₂·₀₇₃　₂·³⁶⁵　₀ ₁·³⁰⁴−․９₁⁵ ₂·³⁶⁵−₂·₀⁷³ ₂·³⁶⁵Ｚ"/></svg>
+      Discord
+    </button>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-n" id="s1">0+</div><div class="stat-l">Clientes</div></div>
+    <div class="stat"><div class="stat-n" id="s2">0%</div><div class="stat-l">+ FPS médio</div></div>
+    <div class="stat"><div class="stat-n" id="s3">0%</div><div class="stat-l">Satisfação</div></div>
+    <div class="stat"><div class="stat-n">1-2h</div><div class="stat-l">Entrega</div></div>
+  </div>
+</div>
+
+<section class="pain-banner">
+  <div class="pain-copy">
+    <div class="cbadge pro">Isso &eacute; pra voc&ecirc;</div>
+    <h2>Sofrendo com FPS baixo, delay e travamentos?</h2>
+    <p>Se seu PC parece bom, mas na hora do jogo fica pesado, engasga em troca&ccedil;&atilde;o, demora pra responder ou perde FPS em fight, a otimiza&ccedil;&atilde;o foi feita pra resolver exatamente isso.</p>
+    <div class="pain-actions">
+      <button class="hbtn-main" onclick="document.getElementById('planos').scrollIntoView({behavior:'smooth'})">Escolher otimiza&ccedil;&atilde;o</button>
+      <button class="hbtn-sec" onclick="openWhats('','')">Tirar d&uacute;vida</button>
+    </div>
+  </div>
+  <div class="pain-list">
+    <div class="pain-item"><span></span>FPS caindo no meio da partida</div>
+    <div class="pain-item"><span></span>Input lag atrapalhando mira e edi&ccedil;&atilde;o</div>
+    <div class="pain-item"><span></span>PC travando mesmo com hardware bom</div>
+    <div class="pain-item"><span></span>Windows pesado e cheio de processos</div>
+  </div>
+</section>
+
+<div id="planos" class="sec"><span class="sec-lbl">Serviços</span><div class="sec-line"></div></div>
+<div class="console-banner">
+  <div class="console-glow"></div>
+  <div class="card-grid-lines"></div>
+  <div class="console-head">
+    <div class="cbadge console">Otimiza&ccedil;&atilde;o</div>
+    <div class="console-name">CONSOLE +</div>
+    <p>A otimiza&ccedil;&atilde;o de consoles &eacute; um conjunto de ajustes e configura&ccedil;&otilde;es que visa liberar o desempenho m&aacute;ximo do seu PlayStation ou Xbox.</p>
+    <button class="cbtn cbtn-console" onclick="openWhats('CONSOLE +','R$9,99')">Contratar CONSOLE +</button>
+  </div>
+  <div class="console-info">
+    <div>
+      <div class="clbl">O que ela te entrega</div>
+      <ul class="cfeats console-feats">
+        <li>Configura&ccedil;&otilde;es otimizadas de buff de aim assist</li>
+        <li>FPS cravado e m&aacute;xima estabilidade</li>
+        <li>Delay e input lag extremamente reduzidos</li>
+        <li>Console otimizado para o Fortnite</li>
+        <li>Configura&ccedil;&atilde;o completa do console</li>
+        <li>Otimiza&ccedil;&atilde;o do ping</li>
+      </ul>
+    </div>
+    <div>
+      <div class="clbl">Como &eacute; feita?</div>
+      <p class="console-how">A otimiza&ccedil;&atilde;o vai ser feita por meio de uma v&iacute;deo aula que irei te mandar via Google Drive. L&aacute; eu explico tudo certinho, sem enrola&ccedil;&atilde;o. O acesso &agrave; v&iacute;deo aula fica dispon&iacute;vel durante 1 hora a partir do hor&aacute;rio da libera&ccedil;&atilde;o.</p>
+    </div>
+  </div>
+</div>
+<div class="cards-grid">
+  <div class="card pro">
+    <div class="card-shine"></div><div class="card-grid-lines"></div>
+    <div class="cbadge pro">Otimização</div>
+    <div class="cname">PRO</div>
+    <p class="cdesc">Alto nível pelo melhor preço. Libera o desempenho máximo do seu PC.</p>
+    <div class="chr"></div>
+    <div class="clbl">O que entrega</div>
+    <ul class="cfeats">
+      <li>Análise completa do sistema</li>
+      <li>Redução de input lag e delay</li>
+      <li>Aumento de desempenho em jogos</li>
+      <li>Melhoria na estabilidade</li>
+      <li>Otimização de CPU e GPU</li>
+      <li>Redução de consumo de energia</li>
+      <li>Otimização de BIOS</li>
+    </ul>
+    <div class="cprice"><span class="cprice-val">R$ 29</span><span class="cprice-dec">,99</span></div>
+    <button class="cbtn cbtn-pro" onclick="openWhats('PRO','R$29,99')">Contratar PRO</button>
+  </div>
+  <div class="card elite">
+    <div class="card-shine"></div><div class="card-grid-lines"></div>
+    <div class="pop-tag">Mais popular</div>
+    <div class="cbadge elite">Otimização</div>
+    <div class="cname">ELITE</div>
+    <p class="cdesc">Para jogadores que querem extrair o máximo da máquina.</p>
+    <div class="chr"></div>
+    <div class="clbl">O que entrega</div>
+    <ul class="cfeats">
+      <li>Tudo da otimização PRO</li>
+      <li>Windows mais leve e otimizado</li>
+      <li>Análise técnica de hardware</li>
+      <li>Input lag extremamente baixo</li>
+      <li>Overclock da placa de vídeo</li>
+      <li>Otimização de rede e ping</li>
+      <li>Configs avançadas de energia</li>
+      <li>Ajustes no jogo escolhido</li>
+    </ul>
+    <div class="cprice"><span class="cprice-val">R$ 59</span><span class="cprice-dec">,99</span></div>
+    <button class="cbtn cbtn-elite" onclick="openWhats('ELITE','R$59,99')">Contratar ELITE</button>
+  </div>
+  <div class="card prem">
+    <div class="card-shine"></div><div class="card-grid-lines"></div>
+    <div class="cbadge prem">Otimização</div>
+    <div class="cname">PREMIUM</div>
+    <p class="cdesc">O melhor desempenho possível, sem comprometer nenhum detalhe.</p>
+    <div class="chr"></div>
+    <div class="clbl">O que entrega</div>
+    <ul class="cfeats">
+      <li>Tudo da otimização ELITE</li>
+      <li>Otimização personalizada por jogo</li>
+      <li>Overclock extremo CPU e GPU</li>
+      <li>Rede avançada, menor ping</li>
+      <li>BIOS com ajustes profundos</li>
+      <li>Configs gráficas personalizadas</li>
+    </ul>
+    <div class="cprice"><span class="cprice-val">R$ 89</span><span class="cprice-dec">,99</span></div>
+    <button class="cbtn cbtn-prem" onclick="openWhats('PREMIUM','R$89,99')">Contratar PREMIUM</button>
+  </div>
+</div>
+
+<div class="sec"><span class="sec-lbl">Como funciona</span><div class="sec-line"></div></div>
+<div class="process" style="margin-bottom:32px">
+  <div class="pstep"><div class="pnum">1</div><div class="ptitle">Você entra em contato</div><div class="pdesc">Manda mensagem no WhatsApp, Discord ou Instagram e escolhe o plano ideal pra você.</div></div>
+  <div class="pstep"><div class="pnum">2</div><div class="ptitle">Agendamos um horário</div><div class="pdesc">Combinamos um momento, normalmente no mesmo dia do contato.</div></div>
+  <div class="pstep"><div class="pnum">3</div><div class="ptitle">Acesso remoto</div><div class="pdesc">Você envia acesso via AnyDesk ou TeamViewer, sem sair de casa.</div></div>
+  <div class="pstep"><div class="pnum">4</div><div class="ptitle">PC otimizado</div><div class="pdesc">Em 1 a 2h seu PC já está rodando no máximo do desempenho.</div></div>
+</div>
+
+
+<div id="diferencial" class="sec"><span class="sec-lbl">Nosso diferencial</span><div class="sec-line"></div></div>
+<div class="diff-grid">
+  <div class="diff-card">
+    <div class="diff-num">01</div>
+    <div class="diff-title">Ajuste com crit&eacute;rio</div>
+    <p>Cada configura&ccedil;&atilde;o &eacute; feita pensando no seu hardware, no seu jogo e no jeito que voc&ecirc; usa o PC.</p>
+  </div>
+  <div class="diff-card">
+    <div class="diff-num">02</div>
+    <div class="diff-title">Processo acompanhado</div>
+    <p>Voc&ecirc; pode acompanhar tudo ao vivo durante o atendimento remoto, com explica&ccedil;&atilde;o clara e sem enrola&ccedil;&atilde;o.</p>
+  </div>
+  <div class="diff-card">
+    <div class="diff-num">03</div>
+    <div class="diff-title">Foco em estabilidade</div>
+    <p>A meta &eacute; ganhar desempenho sem deixar o sistema inst&aacute;vel, sem mexer nos seus arquivos pessoais e sem riscos desnecess&aacute;rios.</p>
+  </div>
+</div>
+
+
+
+<div id="resultados" class="sec"><span class="sec-lbl">Resultados de clientes</span><div class="sec-line"></div></div>
+<div class="gallery">
+  <div class="gtrack-outer"><div class="gtrack" id="gtrack"></div></div>
+  <div class="gnav">
+    <div class="gdots" id="gdots"></div>
+    <div class="garrows">
+      <button class="garr" id="gprev">&#8592;</button>
+      <button class="garr" id="gnext">&#8594;</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="faq" class="sec"><span class="sec-lbl">Dúvidas frequentes</span><div class="sec-line"></div></div>
+<div class="faqs" id="faqs"></div>
+
+<div class="cta-wrap">
+  <div class="cta-bg"></div>
+  <h3>Pronto para turbinar seu PC?</h3>
+  <p>Fale comigo agora pelo WhatsApp ou Discord. Atendimento rápido, resultado garantido.</p>
+  <div class="cta-actions">
+  <button class="cta-btn" onclick="openWhats('','')">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.137 1.535 5.872L.057 23.215a.75.75 0 0 0 .916.938l5.492-1.436A11.928 11.928 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 0 1-4.951-1.354l-.356-.211-3.681.963.984-3.587-.232-.369A9.705 9.705 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+    Falar no WhatsApp
+  </button>
+  <button class="cta-btn cta-btn-discord" onclick="openDiscord()">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px" aria-hidden="true"><path d="M20.317 4.369A19.791 19.791 0 0 0 15.558 2.9a13.811 13.811 0 0 0-.609 1.253 18.27 18.27 0 0 0-5.498 0A12.64 12.64 0 0 0 8.833 2.9a19.736 19.736 0 0 0-4.765 1.471C1.052 8.918.235 13.356.644 17.73a19.93 19.93 0 0 0 5.84 2.97 14.997 14.997 0 0 0 1.252-2.038 12.98 12.98 0 0 1-1.97-.947c.165-.122.327-.248.482-.377a14.14 14.14 0 0 0 11.905 0c.158.13.32.255.482.377-.63.374-1.29.691-1.972.948.36.714.78 1.396 1.252 2.037a19.876 19.876 0 0 0 5.844-2.97c.48-5.07-.819-9.468-3.442-13.361ZM8.02 15.042c-1.14 0-2.073-1.061-2.073-2.365 0-1.304.915-2.365 2.073-2.365 1.165 0 2.092 1.07 2.073 2.365 0 1.304-.915 2.365-2.073 2.365Zm7.96 0c-1.14 0-2.073-1.061-2.073-2.365 0-1.304.915-2.365 2.073-2.365 1.165 0 2.092 1.07 2.073 2.365 0 1.304-.908 2.365-2.073 2.365Z"/></svg>
+    Entrar no Discord
+  </button>
+  </div>
+  <div class="cta-note">Resposta rápida · Atendimento remoto · Resultado no mesmo dia</div>
+</div>
+
+<footer>
+  <div class="ft-logo">Synth Optimizer</div>
+  <div class="ft-copy">© 2026 Todos os direitos reservados.</div>
+  <div class="ft-links"><a onclick="openWhats('','')">WhatsApp</a><a onclick="openDiscord()">Discord</a><a href="https://www.instagram.com/synth_optimizer/" target="_blank" rel="noopener">Instagram</a></div>
+</footer>
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
