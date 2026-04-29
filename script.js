@@ -75,7 +75,7 @@ const GALLERY = [
   {src:'imagens/Cliente3.jpeg', label:'Victor.', sub:'Fortnite · 0 travamentos'},
   {src:'imagens/Cliente4.jpeg', label:'Mat.', sub:'Sem sttutering · maximo desempenho'},
   {src:'imagens/Cliente5.jpeg', label:'Doiselle.', sub:''},
-  {src:'imagens/cliente6.jpeg', label:'Deliquente dc', sub:' · +250 fps'},
+  {src:'imagens/Cliente6.jpeg', label:'Deliquente dc', sub:' · +250 fps'},
 ];
 const PER = 3;
 let gPage = 0;
