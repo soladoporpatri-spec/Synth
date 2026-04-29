@@ -339,7 +339,7 @@ FAQS.forEach((f) => {
 });
 
 function setupRevealAnimations() {
-  const targets = document.querySelectorAll(".hero,.pain-banner,.sec,.console-banner,.cards-grid,.process,.assurance-grid,.diff-grid,.depos,.gallery,.faqs,.cta-wrap,footer");
+  const targets = document.querySelectorAll(".hero,.pain-banner,.sec,.console-banner,.cards-grid,.process,.assurance-grid,.diff-grid,.depos,.results-showcase,.faqs,.cta-wrap,footer");
   targets.forEach((el) => {
     el.classList.add("reveal");
   });
