@@ -1,379 +1,652 @@
-﻿const WHATS = "556286315534";
-const DISCORD = "https://discord.gg/6PHtcCVzQ8";
-const loader = document.getElementById("siteLoader");
-const loaderBar = document.getElementById("loaderBar");
-const loaderText = document.getElementById("loaderText");
+// --- Synth Optimizer 2.0 ---
+// Skills: review-animations, performance-engineer, fixing-accessibility, baseline-ui
+
+// --- Global Config ---
+const WHATS_NUMBER = "5562994488816";
+const DISCORD_LINK = "https://discord.gg/7RBpUfn6Cw";
+
+// --- State & Performance ---
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const isMobileView = window.matchMedia("(max-width: 640px)").matches;
-let loaderProgress = 12;
+const isMobile = window.matchMedia("(max-width: 768px)").matches;
+const isLowEnd = (navigator.deviceMemory && navigator.deviceMemory < 4) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4);
+let is3DEnabled = true; // Forçar o 3D para todos os testes
 
-function setLoaderProgress(value, text) {
-  loaderProgress = Math.max(loaderProgress, Math.min(value, 100));
-  if (loaderBar) loaderBar.style.width = `${loaderProgress}%`;
-  if (loaderText && text) loaderText.innerHTML = text;
-}
-
-function finishLoader() {
-  setLoaderProgress(100, "Tudo pronto.");
-  window.setTimeout(() => {
-    loader?.classList.add("done");
-    document.body.classList.remove("loading");
-  }, 280);
-}
-
-setLoaderProgress(30, "Carregando interface...");
-
-function openWhats(p, pr) {
-  setLoaderProgress(96, "Abrindo WhatsApp...");
-  const price = pr ? ` (${pr})` : "";
-  const m = p ? `Olá! Quero contratar a otimização ${p}${price}.` : "Olá! Quero saber mais sobre as otimizações.";
-  window.open(`https://wa.me/${WHATS}?text=${encodeURIComponent(m)}`, "_blank", "noopener");
-}
-
-function openDiscord() {
-  setLoaderProgress(96, "Abrindo Discord...");
-  window.open(DISCORD, "_blank", "noopener");
-}
-
-const canvas = document.getElementById("bg-canvas");
-const ctx = canvas.getContext("2d");
-let W;
-let H;
-let particles = [];
-let particleFrame;
-
-function resize() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
-  W = canvas.offsetWidth;
-  H = document.body.scrollHeight || 1200;
-  canvas.width = Math.floor(W * dpr);
-  canvas.height = Math.floor(H * dpr);
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-}
-
-function mkParticle() {
-  return {
-    x: Math.random() * W,
-    y: Math.random() * H,
-    r: Math.random() * 1.2 + 0.3,
-    vx: (Math.random() - 0.5) * 0.18,
-    vy: (Math.random() - 0.5) * 0.18,
-    a: Math.random() * 0.5 + 0.1
-  };
-}
-
-function initParticles() {
-  if (prefersReducedMotion || isMobileView) return;
-  resize();
-  particles = Array.from({ length: 42 }, mkParticle);
-}
-
-function drawParticles() {
-  if (prefersReducedMotion || isMobileView) return;
-  if (document.hidden) {
-    particleFrame = requestAnimationFrame(drawParticles);
-    return;
-  }
-  ctx.clearRect(0, 0, W, H);
-
-  particles.forEach((p) => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(167,139,250,${p.a})`;
-    ctx.fill();
-    p.x += p.vx;
-    p.y += p.vy;
-    if (p.x < 0 || p.x > W) p.vx *= -1;
-    if (p.y < 0 || p.y > H) p.vy *= -1;
-  });
-
-  particles.forEach((p, i) => {
-    for (let j = i + 1; j < particles.length; j++) {
-      const q = particles[j];
-      const dx = p.x - q.x;
-      const dy = p.y - q.y;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-
-      if (dist < 100) {
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(q.x, q.y);
-        ctx.strokeStyle = `rgba(167,139,250,${0.06 * (1 - dist / 100)})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
-  });
-
-  particleFrame = requestAnimationFrame(drawParticles);
-}
-
-if (!prefersReducedMotion && !isMobileView) {
-  initParticles();
-  drawParticles();
-}
-window.addEventListener("resize", () => {
-  window.clearTimeout(window.particleResizeTimer);
-  window.particleResizeTimer = window.setTimeout(initParticles, 120);
-});
-
-function animCount(id, end, suf, dur) {
-  let n = 0;
-  const el = document.getElementById(id);
-  const step = Math.max(1, Math.ceil(end / 55));
-  const t = setInterval(() => {
-    n = Math.min(n + step, end);
-    el.textContent = n + suf;
-    if (n >= end) clearInterval(t);
-  }, Math.round(dur / 55));
-}
-
-setTimeout(() => {
-  animCount("s1", 1200, "+", 1100);
-  animCount("s2", 40, "%", 900);
-  animCount("s3", 98, "%", 800);
-}, 500);
-
-const GALLERY = [
-  { src: "imagens/Cliente1.jpeg", label: "Miguel.", sub: "Fortnite · +600 FPS" },
-  { src: "imagens/Cliente2.jpeg", label: "1000x.", sub: "Sem stuttering · +120 FPS" },
-  { src: "imagens/Cliente3.jpeg", label: "Victor.", sub: "Fortnite · 0 travamentos" },
-  { src: "imagens/Cliente4.jpeg", label: "Mat.", sub: "Sem stuttering · máximo desempenho" },
-  { src: "imagens/Cliente5.jpeg", label: "Doiselle.", sub: "" },
-  { src: "imagens/Cliente6.jpeg", label: "Deliquente dc", sub: "+250 FPS" },
-  { src: "imagens/Cliente7.jpeg", label: "VITOR", sub: "Otimizou console" },
-  { src: "imagens/Cliente8.jpeg", label: "Vamp", sub: "sem stuttering +150fps" },
-  { src: "imagens/Cliente9.jpeg", label: "Yang Rinox", sub: "+Estabilidade +fps" },
-  { src: "imagens/Cliente10.jpeg", label: "Leornado", sub: "estabilidade +240" },
-  { src: "imagens/Cliente11.jpeg", label: "YanCardoso", sub: "Estabilidade +fps" },
-  { src: "imagens/Cliente12.jpeg", label: "araujo", sub: "+210fps" },
-  { src: "imagens/Cliente13.jpeg", label: "GREEN", sub: "Otimizou Console" },
-  { src: "imagens/Cliente14.jpeg", label: "Subs", sub: "estabilidade zero input" },
-  { src: "imagens/Cliente15.jpeg", label: "biel7zzx", sub: "Input lag + estabilidade" },
-  { src: "imagens/Cliente16.jpeg", label: "7mathias the best", sub: "+300FPS -input lag" },
-  { src: "imagens/Cliente9.jpeg", label: "Yang Rinox", sub: "+Estabilidade +fps" },
-  { src: "imagens/Cliente11.jpeg", label: "YanCardoso", sub: "Estabilidade +fps" }
-];
-
-let gPage = 0;
-const track = document.getElementById("gtrack");
-const dotsEl = document.getElementById("gdots");
-const prev = document.getElementById("gprev");
-const next = document.getElementById("gnext");
-const galleryState = GALLERY.map(() => ({ loaded: false }));
-let galleryLoadEvents = 0;
-const modal = document.createElement("div");
-modal.className = "gmodal";
-modal.innerHTML = `
-  <button class="gmodal-close" type="button" aria-label="Fechar">x</button>
-  <button class="gmodal-arrow gmodal-prev" type="button" aria-label="Resultado anterior">&#8592;</button>
-  <figure class="gmodal-card">
-    <img class="gmodal-img" alt="">
-    <figcaption>
-      <strong class="gmodal-title"></strong>
-      <span class="gmodal-sub"></span>
-    </figcaption>
-  </figure>
-  <button class="gmodal-arrow gmodal-next" type="button" aria-label="Proximo resultado">&#8594;</button>
-`;
-document.body.appendChild(modal);
-
-let activeGalleryIndex = 0;
-const modalImg = modal.querySelector(".gmodal-img");
-const modalTitle = modal.querySelector(".gmodal-title");
-const modalSub = modal.querySelector(".gmodal-sub");
-const modalPrev = modal.querySelector(".gmodal-prev");
-const modalNext = modal.querySelector(".gmodal-next");
-
-function perPage() {
-  return window.matchMedia("(max-width:640px)").matches ? 2 : 3;
-}
-
-function maxGalleryPage() {
-  return Math.max(0, Math.ceil(GALLERY.length / perPage()) - 1);
-}
-
-function placeholderHtml(item) {
-  return `<div class="gph"><div class="gph-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg></div><div class="gph-txt"><strong>${item.label}</strong><br>${item.sub}</div></div>`;
-}
-
-function markGalleryAsset() {
-  galleryLoadEvents += 1;
-  const progress = 42 + Math.round((galleryLoadEvents / GALLERY.length) * 34);
-  setLoaderProgress(progress, "Preparando resultados...");
-}
-
-GALLERY.forEach((item, index) => {
-  const el = document.createElement("div");
-  el.className = "gitem";
-  el.setAttribute("role", "button");
-  el.setAttribute("tabindex", "0");
-  el.innerHTML = `<img src="${item.src}" alt="${item.label}" loading="lazy"><div class="goverlay"><div class="gname">${item.label}</div><div class="gsub">${item.sub}</div></div>`;
-  const img = el.querySelector("img");
-  img.onload = () => {
-    galleryState[index].loaded = true;
-    el.classList.add("loaded");
-    markGalleryAsset();
-  };
-  img.onerror = () => {
-    galleryState[index].loaded = false;
-    el.classList.add("missing");
-    el.removeAttribute("role");
-    el.removeAttribute("tabindex");
-    el.innerHTML = placeholderHtml(item);
-    markGalleryAsset();
-  };
-  el.onclick = () => openGalleryModal(index);
-  el.onkeydown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      openGalleryModal(index);
-    }
-  };
-  track.appendChild(el);
-});
-
-function renderDots() {
-  dotsEl.innerHTML = "";
-  for (let i = 0; i <= maxGalleryPage(); i++) {
-    const d = document.createElement("button");
-    d.className = "gdot" + (i === gPage ? " on" : "");
-    d.type = "button";
-    d.setAttribute("aria-label", `Ir para a pagina ${i + 1}`);
-    d.onclick = () => goPage(i);
-    dotsEl.appendChild(d);
-  }
-}
-
-function goPage(p) {
-  const per = perPage();
-  gPage = Math.max(0, Math.min(p, maxGalleryPage()));
-  const iw = track.children[0] ? track.children[0].offsetWidth + 12 : 0;
-  track.style.transform = `translateX(-${gPage * per * iw}px)`;
-  document.querySelectorAll(".gdot").forEach((d, i) => d.classList.toggle("on", i === gPage));
-  prev.disabled = gPage === 0;
-  next.disabled = gPage === maxGalleryPage();
-}
-
-prev.onclick = () => goPage(gPage - 1);
-next.onclick = () => goPage(gPage + 1);
-prev.disabled = true;
-renderDots();
-goPage(0);
-window.addEventListener("resize", () => {
-  renderDots();
-  goPage(gPage);
-});
-
-function loadedIndexes() {
-  return galleryState
-    .map((item, index) => item.loaded ? index : -1)
-    .filter((index) => index >= 0);
-}
-
-function openGalleryModal(index) {
-  if (!galleryState[index].loaded) return;
-  activeGalleryIndex = index;
-  updateGalleryModal();
-  modal.classList.add("open");
-  document.body.classList.add("modal-open");
-}
-
-function closeGalleryModal() {
-  modal.classList.remove("open");
-  document.body.classList.remove("modal-open");
-  document.querySelectorAll(".gitem").forEach((item) => item.classList.remove("selected"));
-}
-
-function moveGalleryModal(dir) {
-  const available = loadedIndexes();
-  const current = available.indexOf(activeGalleryIndex);
-  if (current < 0 || available.length < 2) return;
-  activeGalleryIndex = available[(current + dir + available.length) % available.length];
-  updateGalleryModal();
-}
-
-function updateGalleryModal() {
-  const item = GALLERY[activeGalleryIndex];
-  modalImg.src = item.src;
-  modalImg.alt = item.label;
-  modalTitle.textContent = item.label;
-  modalSub.textContent = item.sub || "Resultado de cliente";
-  document.querySelectorAll(".gitem").forEach((el, index) => el.classList.toggle("selected", index === activeGalleryIndex));
-  const hasMultiple = loadedIndexes().length > 1;
-  modalPrev.disabled = !hasMultiple;
-  modalNext.disabled = !hasMultiple;
-}
-
-modal.querySelector(".gmodal-close").onclick = closeGalleryModal;
-modalPrev.onclick = () => moveGalleryModal(-1);
-modalNext.onclick = () => moveGalleryModal(1);
-modal.onclick = (e) => {
-  if (e.target === modal) closeGalleryModal();
+// --- Window Functions (for HTML onclick attributes) ---
+window.openWhats = (plan = '', price = '') => {
+  const p = price ? ` (${price})` : "";
+  const msg = plan ? `Olá! Quero otimizar meu PC com o plano ${plan}${p}.` : "Olá! Quero saber mais sobre a otimização.";
+  window.open(`https://wa.me/${WHATS_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
 };
-window.addEventListener("keydown", (e) => {
-  if (!modal.classList.contains("open")) return;
-  if (e.key === "Escape") closeGalleryModal();
-  if (e.key === "ArrowLeft") moveGalleryModal(-1);
-  if (e.key === "ArrowRight") moveGalleryModal(1);
-});
 
-const FAQS = [
-  { q: "Isso pode danificar meu PC?", a: "Não. A otimização é feita com ajustes seguros de sistema, energia, rede, drivers e configurações. O foco é desempenho com estabilidade, sem forçar o PC além do que ele suporta." },
-  { q: "Perco arquivos pessoais?", a: "Não. Seus arquivos pessoais não são apagados. O trabalho é feito nas configurações do sistema e, quando alguma limpeza for necessária, ela é feita com cuidado." },
-  { q: "Preciso formatar?", a: "Na maioria dos casos, não. A formatação só é recomendada quando o Windows está muito pesado, corrompido ou cheio de problemas. Se for necessário, isso é conversado antes." },
-  { q: "Quanto FPS posso ganhar?", a: "Depende do seu hardware, do jogo e do estado atual do Windows. Além do FPS, a otimização costuma melhorar travamentos, delay, estabilidade e tempo de resposta." },
-  { q: "Funciona em notebook?", a: "Sim. A otimização também funciona em notebook gamer ou notebook comum, respeitando os limites de temperatura, energia e hardware do aparelho." },
-  { q: "Posso acompanhar tudo ao vivo?", a: "Sim. No atendimento remoto você pode acompanhar tudo pela tela, tirar dúvidas e ver o que está sendo ajustado durante o processo." },
-  { q: "Tem suporte depois da otimização?", a: "Sim. Se algo não ficar do jeito que você esperava, reviso os ajustes com você e faço as correções necessárias para deixar o PC estável e confortável para jogar." },
-  { q: "Como funciona o pagamento?", a: "O pagamento pode ser feito via Pix ou cartão. No WhatsApp eu confirmo o plano, o valor e o melhor horário antes de iniciar o atendimento." },
-  { q: "Qual é o prazo de entrega?", a: "Normalmente no mesmo dia do contato. Combinamos um horário e fazemos tudo remotamente em cerca de 1 a 2 horas, dependendo do plano e do estado do PC." },
-  { q: "De quanto em quanto tempo posso otimizar novamente?", a: "Recomendo revisar a otimização a cada 3 a 6 meses, principalmente depois de muitas atualizações do Windows, drivers ou jogos." }
-];const faqEl = document.getElementById("faqs");
-FAQS.forEach((f) => {
-  const d = document.createElement("div");
-  d.className = "faqitem";
-  d.innerHTML = `<div class="faq-q">${f.q}<span class="faq-ic">▼</span></div><div class="faq-a"><p>${f.a}</p></div>`;
-  d.querySelector(".faq-q").onclick = () => d.classList.toggle("open");
-  faqEl.appendChild(d);
-});
+window.openDiscord = () => {
+  window.open(DISCORD_LINK, "_blank");
+};
 
-function setupRevealAnimations() {
-  const targets = document.querySelectorAll(".hero,.pain-banner,.sec,.console-banner,.cards-grid,.process,.assurance-grid,.diff-grid,.depos,.results-showcase,.faqs,.cta-wrap,footer");
-  targets.forEach((el) => {
-    el.classList.add("reveal");
+window.scrollToId = (id) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+};
+
+// --- DOM Elements ---
+const loader = document.getElementById('loader');
+const loaderBar = document.getElementById('loader-bar');
+const loaderStatus = document.getElementById('loader-status');
+
+// --- Loader ---
+let loadProgress = 0;
+const loaderInterval = setInterval(() => {
+  loadProgress += Math.random() * 18;
+  if (loadProgress >= 100) loadProgress = 100;
+  if (loaderBar) loaderBar.style.width = `${loadProgress}%`;
+  
+  if (loadProgress > 40 && loadProgress < 70 && loaderStatus) loaderStatus.innerText = "TUNING SYSTEM...";
+  if (loadProgress > 70 && loaderStatus) loaderStatus.innerText = "SYSTEM READY";
+  
+  if (loadProgress === 100) {
+    clearInterval(loaderInterval);
+    setTimeout(() => {
+      document.body.classList.remove('loading');
+      if (loader) loader.classList.add('hidden');
+      initScrollAnimations();
+      initRevealObserver();
+    }, 400);
+  }
+}, 150);
+
+// --- Mobile Menu ---
+const btnMenu = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+if (btnMenu && mobileMenu) {
+  btnMenu.addEventListener('click', () => {
+    const isActive = mobileMenu.classList.toggle('active');
+    btnMenu.setAttribute('aria-expanded', isActive);
   });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      btnMenu.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
 
-  if (prefersReducedMotion || isMobileView || !("IntersectionObserver" in window)) {
-    targets.forEach((el) => el.classList.add("in-view"));
+// --- Navbar Scroll (performance-engineer: IntersectionObserver instead of scroll listener) ---
+const navbar = document.querySelector('.navbar');
+const heroSection = document.querySelector('.hero');
+
+if (navbar && heroSection) {
+  const navObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        navbar.classList.remove('scrolled');
+      } else {
+        navbar.classList.add('scrolled');
+      }
+    },
+    { threshold: 0.1, rootMargin: '-60px 0px 0px 0px' }
+  );
+  navObserver.observe(heroSection);
+}
+
+// --- Scroll Reveal (review-animations: IntersectionObserver, not scroll events) ---
+function initRevealObserver() {
+  if (prefersReducedMotion) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
     return;
   }
+  
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+  );
+  
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+}
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in-view");
-        observer.unobserve(entry.target);
+// --- FAQ Accordion (fixing-accessibility: keyboard support) ---
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    toggleFaq(btn);
+  });
+  
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleFaq(btn);
+    }
+  });
+});
+
+function toggleFaq(btn) {
+  const parent = btn.parentElement;
+  const answer = parent.querySelector('.faq-a');
+  const isOpen = parent.classList.contains('active');
+  
+  // Close others
+  document.querySelectorAll('.faq-item').forEach(item => {
+    if (item !== parent) {
+      item.classList.remove('active');
+      const a = item.querySelector('.faq-a');
+      if (a) a.style.maxHeight = null;
+      const q = item.querySelector('.faq-q');
+      if (q) q.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Toggle current
+  if (isOpen) {
+    parent.classList.remove('active');
+    answer.style.maxHeight = null;
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    parent.classList.add('active');
+    answer.style.maxHeight = answer.scrollHeight + "px";
+    btn.setAttribute('aria-expanded', 'true');
+  }
+}
+
+// --- Wall of Results ---
+const wallContainer = document.getElementById('wall-of-results');
+if (wallContainer) {
+  const fragments = [];
+  const labels = ["ESTABILIDADE + FPS", "INPUT LAG ZERADO", "SISTEMA RESPONSIVO", "MENOS DELAY", "1% LOW CRAVADO", "JOGO LISO"];
+  
+  for (let i = 1; i <= 12; i++) {
+    const randomLabel = labels[Math.floor(Math.random() * labels.length)];
+    const html = `
+      <div class="result-card reveal" onclick="openLightbox('imagens/Cliente${i}.jpeg')">
+        <div class="result-img-wrapper">
+           <img src="imagens/Cliente${i}.jpeg" alt="Resultado da otimização do cliente ${i}" loading="lazy" onerror="this.parentElement.parentElement.style.display='none'">
+        </div>
+        <div class="result-hud">${randomLabel}</div>
+      </div>
+    `;
+    fragments.push(html);
+  }
+  wallContainer.innerHTML = fragments.join('');
+}
+
+// --- Lightbox (fixing-accessibility: Escape key, backdrop click, focus trap) ---
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+
+window.openLightbox = (src) => {
+  if (!lightbox || !lightboxImg) return;
+  lightboxImg.src = src;
+  lightbox.classList.add('active');
+  lightbox.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  
+  // Focus the close button
+  const closeBtn = lightbox.querySelector('.lightbox-close');
+  if (closeBtn) closeBtn.focus();
+};
+
+window.closeLightbox = () => {
+  if (!lightbox) return;
+  lightbox.classList.remove('active');
+  lightbox.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+};
+
+// Close on Escape key
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (lightbox && lightbox.classList.contains('active')) {
+      window.closeLightbox();
+    }
+    if (mobileMenu && mobileMenu.classList.contains('active')) {
+      mobileMenu.classList.remove('active');
+      if (btnMenu) btnMenu.setAttribute('aria-expanded', 'false');
+    }
+  }
+});
+
+// Close lightbox on backdrop click
+if (lightbox) {
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      window.closeLightbox();
+    }
+  });
+}
+
+
+// --- GSAP Scroll Animations ---
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+function initScrollAnimations() {
+  if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+  
+  // Counter animation
+  const counter = document.getElementById('counter-clients');
+  if (counter) {
+    ScrollTrigger.create({
+      trigger: counter,
+      start: "top 85%",
+      once: true,
+      onEnter: () => {
+        gsap.to(counter, {
+          innerHTML: 1200,
+          duration: 2.5,
+          ease: "power2.out",
+          snap: { innerHTML: 1 },
+          onUpdate: function() {
+            counter.innerHTML = Math.round(this.targets()[0].innerHTML) + "+";
+          }
+        });
       }
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  }
 
-  targets.forEach((el) => observer.observe(el));
+  // Pipeline Progress
+  const pipeProgress = document.getElementById('pipe-progress');
+  const pipeTrack = document.querySelector('.pipeline-track');
+  if (pipeProgress && pipeTrack) {
+    gsap.to(pipeProgress, {
+      height: "100%",
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".pipeline-container",
+        start: "top center",
+        end: "bottom center",
+        scrub: 0.8
+      }
+    });
+
+    document.querySelectorAll('.pipe-step').forEach((step) => {
+      ScrollTrigger.create({
+        trigger: step,
+        start: "top 60%",
+        onEnter: () => step.classList.add('active'),
+        onLeaveBack: () => step.classList.remove('active')
+      });
+    });
+  }
+  
+  // Tilt Cards (Desktop only, gated behind hover media query check)
+  if (!isMobile && !prefersReducedMotion && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    document.querySelectorAll('[data-tilt]').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const tiltX = ((y - centerY) / centerY) * -4;
+        const tiltY = ((x - centerX) / centerX) * 4;
+        
+        gsap.to(card, {
+          rotationX: tiltX,
+          rotationY: tiltY,
+          transformPerspective: 800,
+          ease: "power1.out",
+          duration: 0.4
+        });
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {
+          rotationX: 0,
+          rotationY: 0,
+          ease: "power2.out",
+          duration: 0.6
+        });
+      });
+    });
+  }
+  
+  // Section reveal animations with stagger
+  if (!prefersReducedMotion) {
+    // Hero content entrance
+    const heroContent = document.querySelector('.hero-content');
+    if (heroContent) {
+      gsap.fromTo(heroContent.children,
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.12, ease: "power2.out", delay: 0.3 }
+      );
+    }
+    
+    // Bento cards stagger
+    gsap.utils.toArray('.bento-card').forEach((card, i) => {
+      gsap.fromTo(card,
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1, y: 0,
+          duration: 0.6,
+          delay: i * 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+    });
+    
+    // Plan cards stagger
+    gsap.utils.toArray('.plan-card').forEach((card, i) => {
+      gsap.fromTo(card,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1, y: 0,
+          duration: 0.7,
+          delay: i * 0.15,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+    });
+    
+    // Trust cards stagger
+    gsap.utils.toArray('.trust-card').forEach((card, i) => {
+      gsap.fromTo(card,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1, y: 0,
+          duration: 0.6,
+          delay: i * 0.1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+    });
+    
+    // CTA entrance
+    const ctaTitle = document.querySelector('.cta-title');
+    if (ctaTitle) {
+      gsap.fromTo(ctaTitle,
+        { opacity: 0, scale: 0.95 },
+        {
+          opacity: 1, scale: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ctaTitle,
+            start: "top 85%",
+            once: true
+          }
+        }
+      );
+    }
+  }
 }
 
-setupRevealAnimations();
-setLoaderProgress(86, "Finalizando detalhes...");
 
-const loaderStart = performance.now();
-function finishWhenReady() {
-  const elapsed = performance.now() - loaderStart;
-  window.setTimeout(finishLoader, Math.max(0, 650 - elapsed));
+// --- Three.js Scene (Synth Wave & Abstract Hardware) ---
+if (is3DEnabled && typeof THREE !== 'undefined') {
+  const canvas = document.getElementById('webgl-canvas');
+  
+  if (canvas) {
+    const scene = new THREE.Scene();
+    scene.fog = new THREE.FogExp2(0x05040a, 0.04);
+
+    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 0, 15);
+
+    const renderer = new THREE.WebGLRenderer({ 
+      canvas, 
+      alpha: true, 
+      antialias: !isMobile, // Skip AA on mobile for perf
+      powerPreference: "high-performance" 
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Cap at 1.5x for performance
+
+    // --- Synth Wave (Particle Line) ---
+    const waveParams = {
+      count: isMobile ? 120 : 200, // Fewer particles on mobile
+      amplitude: 2.0,
+      frequency: 0.5,
+      speed: 0.02
+    };
+    
+    const waveGeometry = new THREE.BufferGeometry();
+    const wavePositions = new Float32Array(waveParams.count * 3);
+    for (let i = 0; i < waveParams.count; i++) {
+      wavePositions[i*3] = (i / waveParams.count) * 40 - 20;
+      wavePositions[i*3+1] = 0;
+      wavePositions[i*3+2] = (Math.random() - 0.5) * 5;
+    }
+    waveGeometry.setAttribute('position', new THREE.BufferAttribute(wavePositions, 3));
+    
+    const waveMaterial = new THREE.ShaderMaterial({
+      uniforms: {
+        time: { value: 0 },
+        amplitude: { value: waveParams.amplitude },
+        frequency: { value: waveParams.frequency },
+        colorMain: { value: new THREE.Color(0x8b5cf6) },
+        colorSec: { value: new THREE.Color(0x06b6d4) }
+      },
+      vertexShader: `
+        uniform float time;
+        uniform float amplitude;
+        uniform float frequency;
+        varying vec3 vPos;
+        
+        void main() {
+          vec3 pos = position;
+          float n = sin(pos.x * frequency + time) * cos(pos.z * frequency + time * 0.5);
+          pos.y += n * amplitude;
+          vPos = pos;
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_PointSize = (15.0 / -mvPosition.z);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        uniform vec3 colorMain;
+        uniform vec3 colorSec;
+        varying vec3 vPos;
+        void main() {
+          float dist = length(gl_PointCoord - vec2(0.5));
+          if (dist > 0.5) discard;
+          float alpha = (0.5 - dist) * 2.0;
+          vec3 col = mix(colorSec, colorMain, (vPos.y + 2.0) / 4.0);
+          gl_FragColor = vec4(col, alpha * 0.8);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending
+    });
+
+    const wavePoints = new THREE.Points(waveGeometry, waveMaterial);
+    scene.add(wavePoints);
+
+    // --- 3D Hardware (CPU, RAM, GPU) ---
+    const hwGroup = new THREE.Group();
+    const edgeMatCyan = new THREE.LineBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.6 });
+    const edgeMatPurple = new THREE.LineBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.6 });
+    const solidMat = new THREE.MeshBasicMaterial({ color: 0x0a0a10 });
+
+    // 1. Procedural CPU
+    const cpuGroup = new THREE.Group();
+    const cpuBase = new THREE.Mesh(new THREE.BoxGeometry(2, 0.1, 2), solidMat);
+    cpuBase.add(new THREE.LineSegments(new THREE.EdgesGeometry(cpuBase.geometry), edgeMatPurple));
+    const cpuIhs = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.2, 1.4), solidMat);
+    cpuIhs.position.y = 0.15;
+    cpuIhs.add(new THREE.LineSegments(new THREE.EdgesGeometry(cpuIhs.geometry), edgeMatCyan));
+    cpuGroup.add(cpuBase, cpuIhs);
+    cpuGroup.position.set(4, -1, -3);
+    cpuGroup.rotation.set(0.4, -0.5, 0);
+    cpuGroup.userData = { floatOffset: 0, speed: 0.005 };
+
+    // 2. Procedural RAM
+    const ramGroup = new THREE.Group();
+    const ramPcb = new THREE.Mesh(new THREE.BoxGeometry(3.5, 1.2, 0.1), solidMat);
+    ramPcb.add(new THREE.LineSegments(new THREE.EdgesGeometry(ramPcb.geometry), edgeMatCyan));
+    for(let i = 0; i < 4; i++) {
+      const chip = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.6, 0.15), solidMat);
+      chip.position.set(-1.1 + i * 0.73, 0, 0.05);
+      chip.add(new THREE.LineSegments(new THREE.EdgesGeometry(chip.geometry), edgeMatPurple));
+      ramPcb.add(chip);
+    }
+    ramGroup.add(ramPcb);
+    ramGroup.position.set(-5, 2, -5);
+    ramGroup.rotation.set(-0.2, 0.5, 0.2);
+    ramGroup.userData = { floatOffset: 2, speed: -0.004 };
+
+    // 3. Procedural GPU
+    const gpuGroup = new THREE.Group();
+    const gpuBody = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.4, 1.8), solidMat);
+    gpuBody.add(new THREE.LineSegments(new THREE.EdgesGeometry(gpuBody.geometry), edgeMatPurple));
+    const fanGeo = new THREE.CylinderGeometry(0.55, 0.55, 0.1, 16);
+    for(let i = 0; i < 2; i++) {
+      const fan = new THREE.Mesh(fanGeo, solidMat);
+      fan.rotation.x = Math.PI / 2;
+      fan.position.set(i === 0 ? -1.1 : 1.1, 0, 0.95);
+      fan.add(new THREE.LineSegments(new THREE.EdgesGeometry(fanGeo), edgeMatCyan));
+      gpuGroup.add(fan);
+    }
+    gpuGroup.position.set(6, 4, -8);
+    gpuGroup.rotation.set(0.3, -0.6, -0.1);
+    gpuGroup.userData = { floatOffset: 4, speed: 0.003 };
+
+    hwGroup.add(cpuGroup, ramGroup, gpuGroup);
+    scene.add(hwGroup);
+
+    // --- Mouse Parallax ---
+    let mouseX = 0;
+    let mouseY = 0;
+    const windowHalfX = window.innerWidth / 2;
+    const windowHalfY = window.innerHeight / 2;
+
+    if (!isMobile) {
+      document.addEventListener('mousemove', (event) => {
+        mouseX = (event.clientX - windowHalfX) * 0.001;
+        mouseY = (event.clientY - windowHalfY) * 0.001;
+      }, { passive: true });
+    }
+
+    // --- Render Loop ---
+    const clock = new THREE.Clock();
+    let isPageVisible = true;
+    
+    // Pause rendering when tab is hidden (performance-engineer)
+    document.addEventListener('visibilitychange', () => {
+      isPageVisible = !document.hidden;
+      if (isPageVisible) {
+        clock.getDelta(); // Reset delta to avoid jump
+        animate();
+      }
+    });
+
+    function animate() {
+      if (!isPageVisible) return;
+      requestAnimationFrame(animate);
+      
+      const elapsedTime = clock.getElapsedTime();
+
+      // Mouse Parallax (smooth interpolation)
+      if (!isMobile) {
+        const targetX = mouseX * 1.5;
+        const targetY = mouseY * 1.5;
+        camera.position.x += (targetX - camera.position.x) * 0.03;
+        camera.position.y += (-targetY - camera.position.y) * 0.03;
+        camera.lookAt(scene.position);
+      }
+
+      // Wave
+      waveMaterial.uniforms.time.value = elapsedTime * waveParams.speed * 50;
+      waveMaterial.uniforms.amplitude.value = waveParams.amplitude;
+
+      // Hardware Floating & Spinning
+      hwGroup.children.forEach(child => {
+        child.rotation.y += child.userData.speed;
+        child.position.y += Math.sin(elapsedTime * 2 + child.userData.floatOffset) * 0.005;
+      });
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    // --- ScrollTrigger for 3D Storytelling ---
+    if (typeof ScrollTrigger !== 'undefined') {
+      
+      // 1. Hero -> Bento (CPU and RAM come to focus)
+      ScrollTrigger.create({
+        trigger: ".bento-section",
+        start: "top bottom",
+        end: "center center",
+        scrub: 1.2,
+        onUpdate: (self) => {
+          const p = self.progress;
+          waveParams.amplitude = 2.0 - (p * 1.5);
+          
+          // CPU moves to the left background
+          cpuGroup.position.x = 4 - (p * 8);
+          cpuGroup.position.z = -3 + (p * 1);
+          
+          // RAM moves to the right background
+          ramGroup.position.x = -5 + (p * 9);
+          ramGroup.position.y = 2 - (p * 2);
+          
+          // GPU moves up and away
+          gpuGroup.position.y = 4 + (p * 5);
+        }
+      });
+
+      // 2. Bento -> Plans (GPU comes to focus)
+      ScrollTrigger.create({
+        trigger: ".plans-section",
+        start: "top bottom",
+        end: "center center",
+        scrub: 1.2,
+        onUpdate: (self) => {
+          const p = self.progress;
+          
+          // GPU swoops into view behind the Elite plan
+          gpuGroup.position.x = 6 - (p * 4.5);
+          gpuGroup.position.y = 9 - (p * 8.5);
+          gpuGroup.position.z = -8 + (p * 3);
+          
+          // CPU and RAM drop out of frame
+          cpuGroup.position.y = -1 - (p * 8);
+          ramGroup.position.y = 0 - (p * 8);
+        }
+      });
+
+      // 3. Elite Plan Color Shift
+      ScrollTrigger.create({
+        trigger: ".card-elite",
+        start: "top center",
+        onEnter: () => {
+          gsap.to(waveParams, { speed: 0.05, duration: 1.2, ease: "power2.out" });
+          gsap.to(waveMaterial.uniforms.colorMain.value, { r: 0.02, g: 0.71, b: 0.83, duration: 1.2 });
+        },
+        onLeaveBack: () => {
+          gsap.to(waveParams, { speed: 0.02, duration: 1.2, ease: "power2.out" });
+          gsap.to(waveMaterial.uniforms.colorMain.value, { r: 0.54, g: 0.36, b: 0.96, duration: 1.2 });
+        }
+      });
+    }
+
+    // Handle Resize (debounced)
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }, 150);
+    }, { passive: true });
+  }
 }
-
-if (document.readyState === "complete") {
-  finishWhenReady();
-} else {
-  window.addEventListener("load", finishWhenReady, { once: true });
-}
-
-window.setTimeout(finishLoader, 2200);
