@@ -400,12 +400,12 @@ if (is3DEnabled) {
     const canvas = document.getElementById('webgl-canvas');
   
   if (canvas) {
-    let renderer;
+    let renderer, scene, camera;
     try {
-      const scene = new THREE.Scene();
+      scene = new THREE.Scene();
       scene.fog = new THREE.FogExp2(0x05040a, 0.04);
 
-      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
       camera.position.set(0, 0, 15);
 
       renderer = new THREE.WebGLRenderer({ 
