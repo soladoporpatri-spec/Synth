@@ -1,4 +1,4 @@
-﻿/* 
+/* 
   Synth Optimizer 2.0 
   Design System & Styles
   Skills: high-end-visual-design, baseline-ui, ckw-design, fixing-accessibility
@@ -92,7 +92,7 @@ body.loading {
   z-index: 1;
 }
 
-/* â”€â”€ Focus Styles (fixing-accessibility) â”€â”€ */
+/* ── Focus Styles (fixing-accessibility) ── */
 :focus-visible {
   outline: 2px solid var(--synth-primary);
   outline-offset: 3px;
@@ -102,7 +102,7 @@ button:focus:not(:focus-visible) {
   outline: none;
 }
 
-/* â”€â”€ Typography â”€â”€ */
+/* ── Typography ── */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.08;
@@ -121,7 +121,7 @@ p {
   background-clip: text;
 }
 
-/* â”€â”€ Scroll Reveal (review-animations) â”€â”€ */
+/* ── Scroll Reveal (review-animations) ── */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -138,10 +138,10 @@ p {
 .reveal-delay-2 { transition-delay: 200ms; }
 .reveal-delay-3 { transition-delay: 300ms; }
 
-/* â”€â”€ Background WebGL â”€â”€ */
+/* ── Background WebGL ── */
 
 
-/* â”€â”€ Loader â”€â”€ */
+/* ── Loader ── */
 .loader {
   position: fixed;
   inset: 0;
@@ -192,7 +192,7 @@ p {
   transition: width 0.15s linear;
 }
 
-/* â”€â”€ Layout â”€â”€ */
+/* ── Layout ── */
 .section {
   position: relative;
   max-width: 1200px;
@@ -241,7 +241,7 @@ p {
   opacity: 0.7;
 }
 
-/* â”€â”€ Navbar â”€â”€ */
+/* ── Navbar ── */
 .navbar {
   position: fixed;
   top: 0;
@@ -382,7 +382,7 @@ p {
   color: var(--synth-primary);
 }
 
-/* â”€â”€ Buttons (high-end-visual-design) â”€â”€ */
+/* ── Buttons (high-end-visual-design) ── */
 .btn-primary, .btn-outline, .btn-tertiary {
   display: inline-flex;
   align-items: center;
@@ -450,7 +450,7 @@ p {
   padding: 1.125rem 2.5rem;
 }
 
-/* â”€â”€ Hero â”€â”€ */
+/* ── Hero ── */
 .hero {
   min-height: 100svh;
   display: flex;
@@ -500,7 +500,7 @@ p {
   align-items: center;
 }
 
-/* â”€â”€ Bento Grid (design-taste-frontend: asymmetric grids) â”€â”€ */
+/* ── Bento Grid (design-taste-frontend: asymmetric grids) ── */
 .bento-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr 0.6fr;
@@ -584,7 +584,7 @@ p {
   margin-top: var(--space-sm);
 }
 
-/* â”€â”€ Plans (high-end-visual-design: visual hierarchy) â”€â”€ */
+/* ── Plans (high-end-visual-design: visual hierarchy) ── */
 .plans-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -699,7 +699,7 @@ p {
 }
 
 .plan-features li::before {
-  content: "âœ“";
+  content: "✓";
   color: var(--synth-primary);
   font-weight: 600;
   flex-shrink: 0;
@@ -710,7 +710,7 @@ p {
   color: var(--synth-secondary);
 }
 
-/* â”€â”€ Pipeline â”€â”€ */
+/* ── Pipeline ── */
 .pipeline-container {
   display: flex;
   gap: var(--space-3xl);
@@ -787,7 +787,7 @@ p {
   max-width: 400px;
 }
 
-/* â”€â”€ Trust Bento â”€â”€ */
+/* ── Trust Bento ── */
 .trust-bento {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr 0.8fr;
@@ -834,7 +834,7 @@ p {
   line-height: 1.7;
 }
 
-/* â”€â”€ Wall of Results â”€â”€ */
+/* ── Wall of Results ── */
 .wall-of-results {
   columns: 3;
   column-gap: var(--space-md);
@@ -895,7 +895,7 @@ p {
   transform: translateY(0);
 }
 
-/* â”€â”€ FAQ â”€â”€ */
+/* ── FAQ ── */
 .faq-list {
   max-width: 720px;
   margin: 0 auto;
@@ -957,7 +957,7 @@ p {
   line-height: 1.7;
 }
 
-/* â”€â”€ CTA Final â”€â”€ */
+/* ── CTA Final ── */
 .final-cta {
   text-align: center;
   padding-top: var(--space-section);
@@ -1031,7 +1031,7 @@ p {
   font-weight: 600;
 }
 
-/* â”€â”€ Bento Mini List â”€â”€ */
+/* ── Bento Mini List ── */
 .bento-list {
   list-style: none;
   margin-top: var(--space-md);
@@ -1051,7 +1051,7 @@ p {
 }
 
 .bento-list li::before {
-  content: "â€¢";
+  content: "•";
   color: var(--synth-primary);
   font-size: 1.25rem;
   line-height: 0;
@@ -1072,7 +1072,7 @@ p {
   color: #25D366;
 }
 
-/* â”€â”€ Footer â”€â”€ */
+/* ── Footer ── */
 .footer {
   border-top: 1px solid var(--border-color);
   padding: var(--space-3xl) var(--space-xl);
@@ -1132,7 +1132,7 @@ p {
   letter-spacing: 0.02em;
 }
 
-/* â”€â”€ Floating WhatsApp â”€â”€ */
+/* ── Floating WhatsApp ── */
 .float-whats {
   position: fixed;
   bottom: var(--space-xl);
@@ -1162,7 +1162,7 @@ p {
   transform: scale(1);
 }
 
-/* â”€â”€ Lightbox â”€â”€ */
+/* ── Lightbox ── */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -1214,7 +1214,7 @@ p {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* â”€â”€ Reduced Motion (fixing-accessibility) â”€â”€ */
+/* ── Reduced Motion (fixing-accessibility) ── */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -1228,7 +1228,7 @@ p {
   }
 }
 
-/* â”€â”€ Responsive â”€â”€ */
+/* ── Responsive ── */
 @media (max-width: 1024px) {
   :root {
     --section-pad: 5rem 1.5rem;
@@ -1360,7 +1360,8 @@ p {
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid rgba(255,255,255,0.05);
-  margin-top: 10px; padding-bottom: 15px;
+  margin-top: 10px;
+  padding-bottom: 15px;
   overflow: visible;
 }
 
@@ -1392,17 +1393,19 @@ p {
 
 .visual-label {
   position: absolute;
-  bottom: 8px;
   left: 0;
-  font-size: 0.75rem; letter-spacing: 0.1em; width: 100%; text-align: center; left: 0; bottom: -10px;
+  bottom: -10px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
   font-family: monospace;
   color: rgba(255,255,255,0.4);
   line-height: 1.3;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
 }
 .visual-label::before {
-  content: '?';
+  content: "●";
   color: var(--synth-cyan);
   margin-right: 6px;
   font-size: 0.5rem;
@@ -1621,8 +1624,6 @@ p {
   stroke: var(--synth-purple);
 }
 
-
-
 /* =========================================
    EXPANDABLE PLAN CARDS
 ========================================= */
@@ -1639,23 +1640,6 @@ p {
   opacity: 1;
   margin-top: 20px;
 }
-.plan-expand-hint {
-  text-align: center;
-  font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.4);
-  margin-top: 15px;
-  transition: opacity 0.3s ease;
-  cursor: pointer;
-}
-.plan-card:hover .plan-expand-hint,
-.plan-card.active .plan-expand-hint {
-  opacity: 0;
-  pointer-events: none;
-  height: 0;
-  margin: 0;
-  overflow: hidden;
-}
-
 
 /* Responsive hints */
 .hint-desktop { display: none; }
@@ -1685,4 +1669,3 @@ p {
   padding: 0;
   overflow: hidden;
 }
-
