@@ -391,283 +391,48 @@ function initScrollAnimations() {
 // --- Three.js Scene (Synth Wave & Abstract Hardware) ---
 if (is3DEnabled) {
   if (typeof THREE === 'undefined') {
-    console.error("Three.js not loaded. Check internet or CDN blockers.");
     const errorDiv = document.createElement('div');
     errorDiv.style.cssText = 'position:fixed; top:10px; left:10px; background:orange; color:black; padding:10px; z-index:9999;';
     errorDiv.innerText = 'Three.js CDN não carregou. Verifique conexão ou bloqueadores.';
     document.body.appendChild(errorDiv);
   } else {
     const canvas = document.getElementById('webgl-canvas');
-  
-  if (canvas) {
-    let renderer;
-    try {
-      const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x05040a, 0.04);
-
-      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.set(0, 0, 15);
-
-      renderer = new THREE.WebGLRenderer({ 
-        canvas, 
-        alpha: true, 
-        antialias: !isMobile,
-        powerPreference: "high-performance" 
-      });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-    } catch (e) {
-      console.error("Three.js Init Error:", e);
-      const errorDiv = document.createElement('div');
-      errorDiv.style.cssText = 'position:fixed; top:10px; left:10px; background:red; color:white; padding:10px; z-index:9999;';
-      errorDiv.innerText = 'WebGL Error: ' + e.message;
-      document.body.appendChild(errorDiv);
-      // Fallback
-    }
-
-    if (renderer) {
-
-    // --- Synth Wave (Particle Line) ---
-    const waveParams = {
-      count: isMobile ? 120 : 200, // Fewer particles on mobile
-      amplitude: 2.0,
-      frequency: 0.5,
-      speed: 0.02
-    };
-    
-    const waveGeometry = new THREE.BufferGeometry();
-    const wavePositions = new Float32Array(waveParams.count * 3);
-    for (let i = 0; i < waveParams.count; i++) {
-      wavePositions[i*3] = (i / waveParams.count) * 40 - 20;
-      wavePositions[i*3+1] = 0;
-      wavePositions[i*3+2] = (Math.random() - 0.5) * 5;
-    }
-    waveGeometry.setAttribute('position', new THREE.BufferAttribute(wavePositions, 3));
-    
-    const waveMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 0 },
-        amplitude: { value: waveParams.amplitude },
-        frequency: { value: waveParams.frequency },
-        colorMain: { value: new THREE.Color(0x8b5cf6) },
-        colorSec: { value: new THREE.Color(0x06b6d4) }
-      },
-      vertexShader: `
-        uniform float time;
-        uniform float amplitude;
-        uniform float frequency;
-        varying vec3 vPos;
+    if (canvas) {
+      try {
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         
-        void main() {
-          vec3 pos = position;
-          float n = sin(pos.x * frequency + time) * cos(pos.z * frequency + time * 0.5);
-          pos.y += n * amplitude;
-          vPos = pos;
-          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-          gl_PointSize = (15.0 / -mvPosition.z);
-          gl_Position = projectionMatrix * mvPosition;
-        }
-      `,
-      fragmentShader: `
-        uniform vec3 colorMain;
-        uniform vec3 colorSec;
-        varying vec3 vPos;
-        void main() {
-          float dist = length(gl_PointCoord - vec2(0.5));
-          if (dist > 0.5) discard;
-          float alpha = (0.5 - dist) * 2.0;
-          vec3 col = mix(colorSec, colorMain, (vPos.y + 2.0) / 4.0);
-          gl_FragColor = vec4(col, alpha * 0.8);
-        }
-      `,
-      transparent: true,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending
-    });
-
-    const wavePoints = new THREE.Points(waveGeometry, waveMaterial);
-    scene.add(wavePoints);
-
-    // --- 3D Hardware (CPU, RAM, GPU) ---
-    const hwGroup = new THREE.Group();
-    const edgeMatCyan = new THREE.LineBasicMaterial({ color: 0x06b6d4, transparent: true, opacity: 0.6 });
-    const edgeMatPurple = new THREE.LineBasicMaterial({ color: 0x8b5cf6, transparent: true, opacity: 0.6 });
-    const solidMat = new THREE.MeshBasicMaterial({ color: 0x0a0a10 });
-
-    // 1. Procedural CPU
-    const cpuGroup = new THREE.Group();
-    const cpuBase = new THREE.Mesh(new THREE.BoxGeometry(2, 0.1, 2), solidMat);
-    cpuBase.add(new THREE.LineSegments(new THREE.EdgesGeometry(cpuBase.geometry), edgeMatPurple));
-    const cpuIhs = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.2, 1.4), solidMat);
-    cpuIhs.position.y = 0.15;
-    cpuIhs.add(new THREE.LineSegments(new THREE.EdgesGeometry(cpuIhs.geometry), edgeMatCyan));
-    cpuGroup.add(cpuBase, cpuIhs);
-    cpuGroup.position.set(4, -1, -3);
-    cpuGroup.rotation.set(0.4, -0.5, 0);
-    cpuGroup.userData = { floatOffset: 0, speed: 0.005 };
-
-    // 2. Procedural RAM
-    const ramGroup = new THREE.Group();
-    const ramPcb = new THREE.Mesh(new THREE.BoxGeometry(3.5, 1.2, 0.1), solidMat);
-    ramPcb.add(new THREE.LineSegments(new THREE.EdgesGeometry(ramPcb.geometry), edgeMatCyan));
-    for(let i = 0; i < 4; i++) {
-      const chip = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.6, 0.15), solidMat);
-      chip.position.set(-1.1 + i * 0.73, 0, 0.05);
-      chip.add(new THREE.LineSegments(new THREE.EdgesGeometry(chip.geometry), edgeMatPurple));
-      ramPcb.add(chip);
-    }
-    ramGroup.add(ramPcb);
-    ramGroup.position.set(-5, 2, -5);
-    ramGroup.rotation.set(-0.2, 0.5, 0.2);
-    ramGroup.userData = { floatOffset: 2, speed: -0.004 };
-
-    // 3. Procedural GPU
-    const gpuGroup = new THREE.Group();
-    const gpuBody = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.4, 1.8), solidMat);
-    gpuBody.add(new THREE.LineSegments(new THREE.EdgesGeometry(gpuBody.geometry), edgeMatPurple));
-    const fanGeo = new THREE.CylinderGeometry(0.55, 0.55, 0.1, 16);
-    for(let i = 0; i < 2; i++) {
-      const fan = new THREE.Mesh(fanGeo, solidMat);
-      fan.rotation.x = Math.PI / 2;
-      fan.position.set(i === 0 ? -1.1 : 1.1, 0, 0.95);
-      fan.add(new THREE.LineSegments(new THREE.EdgesGeometry(fanGeo), edgeMatCyan));
-      gpuGroup.add(fan);
-    }
-    gpuGroup.position.set(6, 4, -8);
-    gpuGroup.rotation.set(0.3, -0.6, -0.1);
-    gpuGroup.userData = { floatOffset: 4, speed: 0.003 };
-
-    hwGroup.add(cpuGroup, ramGroup, gpuGroup);
-    scene.add(hwGroup);
-
-    // --- Mouse Parallax ---
-    let mouseX = 0;
-    let mouseY = 0;
-    const windowHalfX = window.innerWidth / 2;
-    const windowHalfY = window.innerHeight / 2;
-
-    if (!isMobile) {
-      document.addEventListener('mousemove', (event) => {
-        mouseX = (event.clientX - windowHalfX) * 0.001;
-        mouseY = (event.clientY - windowHalfY) * 0.001;
-      }, { passive: true });
-    }
-
-    // --- Render Loop ---
-    const clock = new THREE.Clock();
-    let isPageVisible = true;
-    
-    // Pause rendering when tab is hidden (performance-engineer)
-    document.addEventListener('visibilitychange', () => {
-      isPageVisible = !document.hidden;
-      if (isPageVisible) {
-        clock.getDelta(); // Reset delta to avoid jump
-        animate();
-      }
-    });
-
-    function animate() {
-      if (!isPageVisible) return;
-      requestAnimationFrame(animate);
-      
-      const elapsedTime = clock.getElapsedTime();
-
-      // Mouse Parallax (smooth interpolation)
-      if (!isMobile) {
-        const targetX = mouseX * 1.5;
-        const targetY = mouseY * 1.5;
-        camera.position.x += (targetX - camera.position.x) * 0.03;
-        camera.position.y += (-targetY - camera.position.y) * 0.03;
-        camera.lookAt(scene.position);
-      }
-
-      // Wave
-      waveMaterial.uniforms.time.value = elapsedTime * waveParams.speed * 50;
-      waveMaterial.uniforms.amplitude.value = waveParams.amplitude;
-
-      // Hardware Floating & Spinning
-      hwGroup.children.forEach(child => {
-        child.rotation.y += child.userData.speed;
-        child.position.y += Math.sin(elapsedTime * 2 + child.userData.floatOffset) * 0.005;
-      });
-
-      renderer.render(scene, camera);
-    }
-
-    animate();
-
-    // --- ScrollTrigger for 3D Storytelling ---
-    if (typeof ScrollTrigger !== 'undefined') {
-      
-      // 1. Hero -> Bento (CPU and RAM come to focus)
-      ScrollTrigger.create({
-        trigger: ".bento-section",
-        start: "top bottom",
-        end: "center center",
-        scrub: 1.2,
-        onUpdate: (self) => {
-          const p = self.progress;
-          waveParams.amplitude = 2.0 - (p * 1.5);
-          
-          // CPU moves to the left background
-          cpuGroup.position.x = 4 - (p * 8);
-          cpuGroup.position.z = -3 + (p * 1);
-          
-          // RAM moves to the right background
-          ramGroup.position.x = -5 + (p * 9);
-          ramGroup.position.y = 2 - (p * 2);
-          
-          // GPU moves up and away
-          gpuGroup.position.y = 4 + (p * 5);
-        }
-      });
-
-      // 2. Bento -> Plans (GPU comes to focus)
-      ScrollTrigger.create({
-        trigger: ".plans-section",
-        start: "top bottom",
-        end: "center center",
-        scrub: 1.2,
-        onUpdate: (self) => {
-          const p = self.progress;
-          
-          // GPU swoops into view behind the Elite plan
-          gpuGroup.position.x = 6 - (p * 4.5);
-          gpuGroup.position.y = 9 - (p * 8.5);
-          gpuGroup.position.z = -8 + (p * 3);
-          
-          // CPU and RAM drop out of frame
-          cpuGroup.position.y = -1 - (p * 8);
-          ramGroup.position.y = 0 - (p * 8);
-        }
-      });
-
-      // 3. Elite Plan Color Shift
-      ScrollTrigger.create({
-        trigger: ".card-elite",
-        start: "top center",
-        onEnter: () => {
-          gsap.to(waveParams, { speed: 0.05, duration: 1.2, ease: "power2.out" });
-          gsap.to(waveMaterial.uniforms.colorMain.value, { r: 0.02, g: 0.71, b: 0.83, duration: 1.2 });
-        },
-        onLeaveBack: () => {
-          gsap.to(waveParams, { speed: 0.02, duration: 1.2, ease: "power2.out" });
-          gsap.to(waveMaterial.uniforms.colorMain.value, { r: 0.54, g: 0.36, b: 0.96, duration: 1.2 });
-        }
-      });
-    }
-
-    // Handle Resize (debounced)
-    let resizeTimeout;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-      }, 150);
-    }, { passive: true });
+        
+        const geometry = new THREE.BoxGeometry(3, 3, 3);
+        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        
+        camera.position.z = 10;
+        
+        function animate() {
+          requestAnimationFrame(animate);
+          cube.rotation.x += 0.01;
+          cube.rotation.y += 0.01;
+          renderer.render(scene, camera);
+        }
+        
+        animate();
+        
+        // Handle Resize
+        window.addEventListener('resize', () => {
+          camera.aspect = window.innerWidth / window.innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+      } catch (e) {
+        const errorDiv = document.createElement('div');
+        errorDiv.style.cssText = 'position:fixed; top:10px; left:10px; background:red; color:white; padding:10px; z-index:9999;';
+        errorDiv.innerText = 'WebGL Error: ' + e.message;
+        document.body.appendChild(errorDiv);
+      }
     }
   }
-}
 }
