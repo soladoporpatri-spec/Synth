@@ -1,4 +1,4 @@
-/* 
+﻿/* 
   Synth Optimizer 2.0 
   Design System & Styles
   Skills: high-end-visual-design, baseline-ui, ckw-design, fixing-accessibility
@@ -92,7 +92,7 @@ body.loading {
   z-index: 1;
 }
 
-/* ── Focus Styles (fixing-accessibility) ── */
+/* â”€â”€ Focus Styles (fixing-accessibility) â”€â”€ */
 :focus-visible {
   outline: 2px solid var(--synth-primary);
   outline-offset: 3px;
@@ -102,7 +102,7 @@ button:focus:not(:focus-visible) {
   outline: none;
 }
 
-/* ── Typography ── */
+/* â”€â”€ Typography â”€â”€ */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.08;
@@ -121,7 +121,7 @@ p {
   background-clip: text;
 }
 
-/* ── Scroll Reveal (review-animations) ── */
+/* â”€â”€ Scroll Reveal (review-animations) â”€â”€ */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -138,10 +138,10 @@ p {
 .reveal-delay-2 { transition-delay: 200ms; }
 .reveal-delay-3 { transition-delay: 300ms; }
 
-/* ── Background WebGL ── */
+/* â”€â”€ Background WebGL â”€â”€ */
 
 
-/* ── Loader ── */
+/* â”€â”€ Loader â”€â”€ */
 .loader {
   position: fixed;
   inset: 0;
@@ -192,7 +192,7 @@ p {
   transition: width 0.15s linear;
 }
 
-/* ── Layout ── */
+/* â”€â”€ Layout â”€â”€ */
 .section {
   position: relative;
   max-width: 1200px;
@@ -241,7 +241,7 @@ p {
   opacity: 0.7;
 }
 
-/* ── Navbar ── */
+/* â”€â”€ Navbar â”€â”€ */
 .navbar {
   position: fixed;
   top: 0;
@@ -382,7 +382,7 @@ p {
   color: var(--synth-primary);
 }
 
-/* ── Buttons (high-end-visual-design) ── */
+/* â”€â”€ Buttons (high-end-visual-design) â”€â”€ */
 .btn-primary, .btn-outline, .btn-tertiary {
   display: inline-flex;
   align-items: center;
@@ -450,7 +450,7 @@ p {
   padding: 1.125rem 2.5rem;
 }
 
-/* ── Hero ── */
+/* â”€â”€ Hero â”€â”€ */
 .hero {
   min-height: 100svh;
   display: flex;
@@ -500,7 +500,7 @@ p {
   align-items: center;
 }
 
-/* ── Bento Grid (design-taste-frontend: asymmetric grids) ── */
+/* â”€â”€ Bento Grid (design-taste-frontend: asymmetric grids) â”€â”€ */
 .bento-grid {
   display: grid;
   grid-template-columns: 1.4fr 1fr 0.6fr;
@@ -584,7 +584,7 @@ p {
   margin-top: var(--space-sm);
 }
 
-/* ── Plans (high-end-visual-design: visual hierarchy) ── */
+/* â”€â”€ Plans (high-end-visual-design: visual hierarchy) â”€â”€ */
 .plans-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -699,7 +699,7 @@ p {
 }
 
 .plan-features li::before {
-  content: "✓";
+  content: "âœ“";
   color: var(--synth-primary);
   font-weight: 600;
   flex-shrink: 0;
@@ -710,7 +710,7 @@ p {
   color: var(--synth-secondary);
 }
 
-/* ── Pipeline ── */
+/* â”€â”€ Pipeline â”€â”€ */
 .pipeline-container {
   display: flex;
   gap: var(--space-3xl);
@@ -787,7 +787,7 @@ p {
   max-width: 400px;
 }
 
-/* ── Trust Bento ── */
+/* â”€â”€ Trust Bento â”€â”€ */
 .trust-bento {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr 0.8fr;
@@ -834,7 +834,7 @@ p {
   line-height: 1.7;
 }
 
-/* ── Wall of Results ── */
+/* â”€â”€ Wall of Results â”€â”€ */
 .wall-of-results {
   columns: 3;
   column-gap: var(--space-md);
@@ -895,7 +895,7 @@ p {
   transform: translateY(0);
 }
 
-/* ── FAQ ── */
+/* â”€â”€ FAQ â”€â”€ */
 .faq-list {
   max-width: 720px;
   margin: 0 auto;
@@ -957,7 +957,7 @@ p {
   line-height: 1.7;
 }
 
-/* ── CTA Final ── */
+/* â”€â”€ CTA Final â”€â”€ */
 .final-cta {
   text-align: center;
   padding-top: var(--space-section);
@@ -1031,7 +1031,7 @@ p {
   font-weight: 600;
 }
 
-/* ── Bento Mini List ── */
+/* â”€â”€ Bento Mini List â”€â”€ */
 .bento-list {
   list-style: none;
   margin-top: var(--space-md);
@@ -1051,7 +1051,7 @@ p {
 }
 
 .bento-list li::before {
-  content: "•";
+  content: "â€¢";
   color: var(--synth-primary);
   font-size: 1.25rem;
   line-height: 0;
@@ -1072,7 +1072,7 @@ p {
   color: #25D366;
 }
 
-/* ── Footer ── */
+/* â”€â”€ Footer â”€â”€ */
 .footer {
   border-top: 1px solid var(--border-color);
   padding: var(--space-3xl) var(--space-xl);
@@ -1132,7 +1132,7 @@ p {
   letter-spacing: 0.02em;
 }
 
-/* ── Floating WhatsApp ── */
+/* â”€â”€ Floating WhatsApp â”€â”€ */
 .float-whats {
   position: fixed;
   bottom: var(--space-xl);
@@ -1162,7 +1162,7 @@ p {
   transform: scale(1);
 }
 
-/* ── Lightbox ── */
+/* â”€â”€ Lightbox â”€â”€ */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -1214,7 +1214,7 @@ p {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* ── Reduced Motion (fixing-accessibility) ── */
+/* â”€â”€ Reduced Motion (fixing-accessibility) â”€â”€ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -1228,7 +1228,7 @@ p {
   }
 }
 
-/* ── Responsive ── */
+/* â”€â”€ Responsive â”€â”€ */
 @media (max-width: 1024px) {
   :root {
     --section-pad: 5rem 1.5rem;
@@ -1437,7 +1437,7 @@ p {
 .gamepad-svg {
   width: 140px;
   height: auto;
-  stroke: var(--text-main);
+  stroke: #ffffff;
   filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4));
   transform: translateZ(15px);
   transition: transform 0.4s ease;
@@ -1685,3 +1685,4 @@ p {
   padding: 0;
   overflow: hidden;
 }
+
