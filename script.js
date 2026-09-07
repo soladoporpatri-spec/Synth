@@ -502,9 +502,9 @@ if (is3DEnabled) {
     cpuIhs.position.y = 0.15;
     cpuIhs.add(new THREE.LineSegments(new THREE.EdgesGeometry(cpuIhs.geometry), edgeMatCyan));
     cpuGroup.add(cpuBase, cpuIhs);
-    cpuGroup.position.set(4, -1, -3);
-    cpuGroup.rotation.set(0.4, -0.5, 0);
-    cpuGroup.userData = { floatOffset: 0, speed: 0.005 };
+    cpuGroup.position.set(6, 4, -5); // Top Right, medium distance
+    cpuGroup.rotation.set(0.4, -0.5, 0.2);
+    cpuGroup.userData = { floatOffset: 0, speed: 0.002 };
 
     // 2. Procedural RAM
     const ramGroup = new THREE.Group();
@@ -517,9 +517,9 @@ if (is3DEnabled) {
       ramPcb.add(chip);
     }
     ramGroup.add(ramPcb);
-    ramGroup.position.set(-5, 2, -5);
-    ramGroup.rotation.set(-0.2, 0.5, 0.2);
-    ramGroup.userData = { floatOffset: 2, speed: -0.004 };
+    ramGroup.position.set(-6, -3, -3); // Bottom Left, closer
+    ramGroup.rotation.set(-0.2, 0.5, -0.3);
+    ramGroup.userData = { floatOffset: 2, speed: -0.002 };
 
     // 3. Procedural GPU (More Realistic 3-Fan Design)
     const gpuGroup = new THREE.Group();
@@ -551,9 +551,9 @@ if (is3DEnabled) {
     gpuGroup.add(pcie);
 
     gpuGroup.add(gpuBody);
-    gpuGroup.position.set(0, 3, -6); // Start middle-top
-    gpuGroup.rotation.set(0.3, -0.6, -0.1);
-    gpuGroup.userData = { floatOffset: 4, speed: 0.005 }; // Reduced from 0.015
+    gpuGroup.position.set(0, 1, -8); // Center, far away
+    gpuGroup.rotation.set(0.3, -0.4, 0.1);
+    gpuGroup.userData = { floatOffset: 4, speed: 0.002 };
 
     hwGroup.add(cpuGroup, ramGroup, gpuGroup);
     scene.add(hwGroup);
@@ -606,13 +606,13 @@ if (is3DEnabled) {
       // Hardware Floating & Spinning
       hwGroup.children.forEach(child => {
         child.rotation.y += child.userData.speed;
-        child.position.y += Math.sin(elapsedTime * 2 + child.userData.floatOffset) * 0.003; // Reduced float amplitude
+        child.position.y += Math.sin(elapsedTime * 2 + child.userData.floatOffset) * 0.002; // Super slow ambient float
         
         // If this is the GPU, spin its fans
         if (child === gpuGroup) {
           child.children.forEach(c => {
             if (c.name === 'fan') {
-              c.rotation.y += 0.04; // Reduced fan speed
+              c.rotation.y += 0.03; // Smooth fan speed
             }
           });
         }
@@ -631,30 +631,25 @@ if (is3DEnabled) {
         trigger: "body",
         start: "top top",
         end: "bottom bottom",
-        scrub: 1.5, // Super smooth scrubbing
+        scrub: 2.5, // Increased scrub for much smoother, lazier inertia
         onUpdate: (self) => {
           const p = self.progress; // 0 to 1 across the whole page
 
           // Synth Wave flattens out slightly as you scroll down
-          waveParams.amplitude = 2.0 - (p * 0.8);
+          waveParams.amplitude = 2.0 - (p * 0.5);
           
-          // CPU floats slowly from top-right down to bottom-left
-          cpuGroup.position.x = 4 - (p * 4);
-          cpuGroup.position.y = 1 + (p * 1.5); 
-          cpuGroup.position.z = -3 + (p * 0.5);
-          cpuGroup.rotation.z = p * 1.0; 
+          // CPU drifts downwards and slightly rotates
+          cpuGroup.position.y = 4 - (p * 6);
+          cpuGroup.rotation.z = 0.2 + (p * 0.8);
           
-          // RAM floats from top-left, crosses screen, to bottom-right
-          ramGroup.position.x = -4 + (p * 4);
-          ramGroup.position.y = -1 - (p * 1);
-          ramGroup.position.z = -4 + (p * 1);
-          ramGroup.rotation.x = -0.2 + (p * 0.8);
+          // RAM drifts upwards and slowly spins
+          ramGroup.position.y = -3 + (p * 5);
+          ramGroup.rotation.z = -0.3 + (p * 1.0);
           
-          // GPU is right in the middle, drops down
-          gpuGroup.position.x = 0 - (p * 3);
-          gpuGroup.position.y = 3 - (p * 4); 
-          gpuGroup.position.z = -6 + (p * 1.5);
-          gpuGroup.rotation.z = -p * 0.8;
+          // GPU moves forward (Z) and slightly drifts down
+          gpuGroup.position.y = 1 - (p * 2); 
+          gpuGroup.position.z = -8 + (p * 5); // Approaches the camera
+          gpuGroup.rotation.x = 0.3 - (p * 0.4);
         }
       });
 
