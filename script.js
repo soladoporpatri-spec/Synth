@@ -521,21 +521,39 @@ if (is3DEnabled) {
     ramGroup.rotation.set(-0.2, 0.5, 0.2);
     ramGroup.userData = { floatOffset: 2, speed: -0.004 };
 
-    // 3. Procedural GPU
+    // 3. Procedural GPU (More Realistic 3-Fan Design)
     const gpuGroup = new THREE.Group();
-    const gpuBody = new THREE.Mesh(new THREE.BoxGeometry(4.5, 1.4, 1.8), solidMat);
+    // Main Body
+    const gpuBody = new THREE.Mesh(new THREE.BoxGeometry(6.0, 1.6, 1.8), solidMat);
     gpuBody.add(new THREE.LineSegments(new THREE.EdgesGeometry(gpuBody.geometry), edgeMatPurple));
-    const fanGeo = new THREE.CylinderGeometry(0.55, 0.55, 0.1, 16);
-    for(let i = 0; i < 2; i++) {
+    
+    // Backplate details
+    const backplate = new THREE.Mesh(new THREE.BoxGeometry(5.8, 1.4, 0.2), solidMat);
+    backplate.position.set(0, 0, -1.0);
+    backplate.add(new THREE.LineSegments(new THREE.EdgesGeometry(backplate.geometry), edgeMatCyan));
+    gpuGroup.add(backplate);
+
+    // Fans
+    const fanGeo = new THREE.CylinderGeometry(0.65, 0.65, 0.1, 16);
+    for(let i = -1; i <= 1; i++) {
       const fan = new THREE.Mesh(fanGeo, solidMat);
+      fan.name = 'fan';
       fan.rotation.x = Math.PI / 2;
-      fan.position.set(i === 0 ? -1.1 : 1.1, 0, 0.95);
+      fan.position.set(i * 1.8, 0, 0.95);
       fan.add(new THREE.LineSegments(new THREE.EdgesGeometry(fanGeo), edgeMatCyan));
       gpuGroup.add(fan);
     }
-    gpuGroup.position.set(6, 4, -8);
+    
+    // PCI-E Connector
+    const pcie = new THREE.Mesh(new THREE.BoxGeometry(3.0, 0.2, 0.4), solidMat);
+    pcie.position.set(-1.0, -0.9, 0);
+    pcie.add(new THREE.LineSegments(new THREE.EdgesGeometry(pcie.geometry), edgeMatCyan));
+    gpuGroup.add(pcie);
+
+    gpuGroup.add(gpuBody);
+    gpuGroup.position.set(0, 3, -6); // Start middle-top
     gpuGroup.rotation.set(0.3, -0.6, -0.1);
-    gpuGroup.userData = { floatOffset: 4, speed: 0.003 };
+    gpuGroup.userData = { floatOffset: 4, speed: 0.015 }; // Fans don't spin, but the whole GPU spins? Wait, let's make the fans spin!
 
     hwGroup.add(cpuGroup, ramGroup, gpuGroup);
     scene.add(hwGroup);
@@ -589,6 +607,15 @@ if (is3DEnabled) {
       hwGroup.children.forEach(child => {
         child.rotation.y += child.userData.speed;
         child.position.y += Math.sin(elapsedTime * 2 + child.userData.floatOffset) * 0.005;
+        
+        // If this is the GPU, spin its fans
+        if (child === gpuGroup) {
+          child.children.forEach(c => {
+            if (c.name === 'fan') {
+              c.rotation.y += 0.1; // Fans spin fast!
+            }
+          });
+        }
       });
 
       renderer.render(scene, camera);
@@ -612,21 +639,21 @@ if (is3DEnabled) {
           waveParams.amplitude = 2.0 - (p * 1.0);
           
           // CPU floats slowly from top-right down to bottom-left
-          cpuGroup.position.x = 4 - (p * 10);
-          cpuGroup.position.y = -1 + (p * 3); // Moves slightly up in world space to counter scroll? No, let it drift down
-          cpuGroup.position.z = -3 + (p * 2);
-          cpuGroup.rotation.z = p * 2; // Extra spin based on scroll
+          cpuGroup.position.x = 4 - (p * 8);
+          cpuGroup.position.y = 1 + (p * 3); 
+          cpuGroup.position.z = -3 + (p * 1);
+          cpuGroup.rotation.z = p * 2; 
           
           // RAM floats from top-left, crosses screen, to bottom-right
-          ramGroup.position.x = -5 + (p * 12);
-          ramGroup.position.y = 2 - (p * 4);
-          ramGroup.position.z = -5 + (p * 3);
+          ramGroup.position.x = -4 + (p * 8);
+          ramGroup.position.y = -1 - (p * 2);
+          ramGroup.position.z = -4 + (p * 2);
           ramGroup.rotation.x = -0.2 + (p * 1.5);
           
-          // GPU starts hidden up top, drops into center focus, then exits left
-          gpuGroup.position.x = 6 - (p * 12);
-          gpuGroup.position.y = 7 - (p * 9); 
-          gpuGroup.position.z = -8 + (p * 5);
+          // GPU is right in the middle, drops down
+          gpuGroup.position.x = 0 - (p * 6);
+          gpuGroup.position.y = 3 - (p * 8); 
+          gpuGroup.position.z = -6 + (p * 3);
           gpuGroup.rotation.z = -p * 1.5;
         }
       });
