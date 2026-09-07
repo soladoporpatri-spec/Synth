@@ -85,15 +85,7 @@ body.loading {
   overflow: hidden;
 }
 
-#webgl-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 9998;
-  pointer-events: none;
-}
+
 
 #smooth-wrapper {
   position: relative;
@@ -147,15 +139,7 @@ p {
 .reveal-delay-3 { transition-delay: 300ms; }
 
 /* ── Background WebGL ── */
-#webgl-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: var(--z-canvas);
-  pointer-events: none;
-}
+
 
 /* ── Loader ── */
 .loader {
@@ -1349,3 +1333,15 @@ p {
   
   .cta-title { font-size: 1.75rem; }
 }
+
+
+
+
+
+
+
+
+
+
+#webgl-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; }
+#smooth-wrapper { position: relative; z-index: 1; }
