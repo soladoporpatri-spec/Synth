@@ -389,24 +389,43 @@ function initScrollAnimations() {
 
 
 // --- Three.js Scene (Synth Wave & Abstract Hardware) ---
-if (is3DEnabled && typeof THREE !== 'undefined') {
-  const canvas = document.getElementById('webgl-canvas');
+if (is3DEnabled) {
+  if (typeof THREE === 'undefined') {
+    console.error("Three.js not loaded. Check internet or CDN blockers.");
+    const errorDiv = document.createElement('div');
+    errorDiv.style.cssText = 'position:fixed; top:10px; left:10px; background:orange; color:black; padding:10px; z-index:9999;';
+    errorDiv.innerText = 'Three.js CDN não carregou. Verifique conexão ou bloqueadores.';
+    document.body.appendChild(errorDiv);
+  } else {
+    const canvas = document.getElementById('webgl-canvas');
   
   if (canvas) {
-    const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x05040a, 0.04);
+    let renderer;
+    try {
+      const scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x05040a, 0.04);
 
-    const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
-    camera.position.set(0, 0, 15);
+      const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+      camera.position.set(0, 0, 15);
 
-    const renderer = new THREE.WebGLRenderer({ 
-      canvas, 
-      alpha: true, 
-      antialias: !isMobile, // Skip AA on mobile for perf
-      powerPreference: "high-performance" 
-    });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Cap at 1.5x for performance
+      renderer = new THREE.WebGLRenderer({ 
+        canvas, 
+        alpha: true, 
+        antialias: !isMobile,
+        powerPreference: "high-performance" 
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
+    } catch (e) {
+      console.error("Three.js Init Error:", e);
+      const errorDiv = document.createElement('div');
+      errorDiv.style.cssText = 'position:fixed; top:10px; left:10px; background:red; color:white; padding:10px; z-index:9999;';
+      errorDiv.innerText = 'WebGL Error: ' + e.message;
+      document.body.appendChild(errorDiv);
+      // Fallback
+    }
+
+    if (renderer) {
 
     // --- Synth Wave (Particle Line) ---
     const waveParams = {
@@ -648,5 +667,7 @@ if (is3DEnabled && typeof THREE !== 'undefined') {
         renderer.setSize(window.innerWidth, window.innerHeight);
       }, 150);
     }, { passive: true });
+    }
   }
+}
 }

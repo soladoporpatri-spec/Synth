@@ -85,6 +85,21 @@ body.loading {
   overflow: hidden;
 }
 
+#webgl-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+#smooth-wrapper {
+  position: relative;
+  z-index: 1;
+}
+
 /* ── Focus Styles (fixing-accessibility) ── */
 :focus-visible {
   outline: 2px solid var(--synth-primary);
