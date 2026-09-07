@@ -1,425 +1,392 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Synth Optimizer | Otimização de PC para Jogos</title>
-  <meta name="description" content="Ajustamos sistema, hardware e jogo para deixar seu PC mais rápido, estável e responsivo. Atendimento remoto acompanhado ao vivo.">
-  <meta name="theme-color" content="#05040a">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Synth Optimizer | Seu PC sem lag">
-  <meta property="og:description" content="Otimização de PC para jogos. Ajustamos sistema, hardware e configurações para eliminar engasgos e reduzir input lag.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://synthoptimizer.com/">
-  
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="imagens/favicon-32x32.png" type="image/png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Synth Optimizer | Otimização de PC para Jogos</title>
+<meta content="Ajustamos sistema, hardware e jogo para deixar seu PC mais rápido, estável e responsivo. Atendimento remoto acompanhado ao vivo." name="description"/>
+<meta content="#05040a" name="theme-color"/>
+<!-- Open Graph -->
+<meta content="Synth Optimizer | Seu PC sem lag" property="og:title"/>
+<meta content="Otimização de PC para jogos. Ajustamos sistema, hardware e configurações para eliminar engasgos e reduzir input lag." property="og:description"/>
+<meta content="website" property="og:type"/>
+<meta content="https://synthoptimizer.com/" property="og:url"/>
+<link href="style.css" rel="stylesheet"/>
+<link href="imagens/favicon-32x32.png" rel="icon" type="image/png"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
 </head>
 <body class="loading">
-  <!-- Loader -->
-  <div id="loader" class="loader" role="status" aria-label="Carregando">
-    <div class="loader-content">
-      <div class="loader-status" id="loader-status">SYNTH INITIALIZING</div>
-      <div class="loader-bar-wrap">
-        <div class="loader-bar" id="loader-bar"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Background WebGL -->
-  <canvas id="webgl-canvas" aria-hidden="true"></canvas>
-
-  <div id="smooth-wrapper">
-    <div id="smooth-content">
-
-      <!-- Navbar -->
-      <nav class="navbar" role="navigation" aria-label="Menu principal">
-        <div class="nav-brand">
-          <img src="imagens/Favicon.png" alt="" width="26" height="26" aria-hidden="true">
-          <span>Synth Optimizer</span>
-        </div>
-        <div class="nav-links">
-          <a href="#problema">Performance</a>
-          <a href="#planos">Planos</a>
-          <a href="#processo">Como Funciona</a>
-          <a href="#resultados">Resultados</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <button class="btn-nav" onclick="openWhats()">Falar no WhatsApp</button>
-        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu">
-           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-        </button>
-      </nav>
-
-      <!-- Mobile Menu -->
-      <div class="mobile-menu" id="mobile-menu" role="dialog" aria-label="Menu de navegação">
-         <div class="mobile-links">
-          <a href="#problema">Performance</a>
-          <a href="#planos">Planos</a>
-          <a href="#processo">Como Funciona</a>
-          <a href="#resultados">Resultados</a>
-          <a href="#faq">FAQ</a>
-         </div>
-      </div>
-
-      <!-- Hero -->
-      <header class="hero section">
-        <div class="hero-content">
-          <div class="hero-badge">OTIMIZAÇÃO PERSONALIZADA AO VIVO</div>
-          <h1 class="hero-title">O SEU PC AINDA<br><span class="highlight">TÁ TRAVANDO.</span></h1>
-          <p class="hero-desc">Você tem peças boas, mas na hora do tiro o jogo engasga. O problema não é seu hardware. Nós regulamos o sistema para você jogar com o FPS cravado no talo.</p>
-          <div class="hero-actions">
-            <button class="btn-primary" onclick="openWhats()">OTIMIZAR MEU PC</button>
-            <button class="btn-outline" onclick="scrollToId('planos')">VER PLANOS</button>
-            <button class="btn-tertiary" onclick="openDiscord()">Discord</button>
-          </div>
-        </div>
-      </header>
-
-      <!-- Problema / O que otimiza (Bento Grid) -->
-      <section id="problema" class="section bento-section" aria-labelledby="problema-title">
-        <div class="section-header align-left reveal">
-          <h2 class="section-title" id="problema-title">O VILÃO É O DELAY.</h2>
-          <p class="section-sub">A sensação de mouse pesado não some comprando uma placa de vídeo nova. O gargalo é o Windows limitando seu PC. Nós arrancamos esse limite.</p>
-        </div>
-        <div class="bento-grid">
-          <div class="bento-card bento-cpu" data-tilt>
-            <div class="bento-glow"></div>
-            <h3>CPU, GPU E MEMÓRIA</h3>
-            <p>A gente tira as amarras de energia do processador, arruma a temperatura da placa de vídeo e aperta os timings da memória RAM. O FPS sobe e o 1% low crava de vez. Acabou a travadinha no meio da trocação de tiro.</p>
-            <ul class="bento-list">
-              <li>Undervolt na placa de vídeo</li>
-              <li>Timings apertados na RAM</li>
-              <li>Processador rodando no máximo</li>
-              <li>Latência miníma</li>
-              <li>Painel de vídeo configurado pro competitivo</li>
-              <li>Tweaks avançados no Windows 10/11</li>
-            </ul>
-          </div>
-          <div class="bento-card bento-sys" data-tilt>
-             <h3>WINDOWS E BIOS</h3>
-             <p>A gente otimiza totalmente seu windows para perfomance máxima. Toda a energia do PC vai direto pro jogo.</p>
-          </div>
-          <div class="bento-card bento-input" data-tilt>
-             <h3>INPUT LAG</h3>
-             <p>Reduzimos atrasos de resposta do mouse, teclado e controle, ajustando o sistema para deixar seus comandos mais rápidos, consistentes e responsivos durante o jogo.</p>
-          </div>
-          <div class="bento-card bento-metrics" data-tilt>
-            <div class="metric-big" id="counter-clients" aria-label="Mais de 1200 clientes satisfeitos">0</div>
-            <div class="metric-label">Pessoas Jogando Liso</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Planos -->
-      <section id="planos" class="section plans-section" aria-labelledby="planos-title">
-        <div class="section-header reveal">
-          <div class="section-kicker">SERVIÇOS</div>
-          <h2 class="section-title" id="planos-title">ATÉ ONDE VOCÊ<br>QUER CHEGAR?</h2>
-        </div>
-        <div class="plans-grid">
-          
-          <!-- Console -->
-          <div class="plan-card" data-tilt>
-            <div class="plan-header">
-              <span class="plan-badge badge-console">CONSOLE</span>
-              <h3 class="plan-price">R$20</h3>
-            </div>
-            <div class="plan-expandable">
-              <p class="plan-desc">Focado na galera que joga no videogame. Arrumamos a internet e o controle.</p>
-            <ul class="plan-features">
-              <li>Configurações otimizadas de buff de aim assist</li>
-              <li>Ajustes para mais estabilidade de FPS</li>
-              <li>Delay e input lag reduzidos</li>
-              <li>Console otimizado para o Fortnite</li>
-              <li>Configuração completa do console</li>
-              <li>Otimização do ping</li>
-            </ul>
-            <div class="plan-expand-hint">Ver pacote completo &#9662;</div>
+<!-- Loader -->
+<div aria-label="Carregando" class="loader" id="loader" role="status">
+<div class="loader-content">
+<div class="loader-status" id="loader-status">SYNTH INITIALIZING</div>
+<div class="loader-bar-wrap">
+<div class="loader-bar" id="loader-bar"></div>
 </div>
-            <div class="mt-auto">
-              <button class="btn-outline btn-full" onclick="openWhats('Console', 'R$20')">ESCOLHER CONSOLE</button>
-            </div>
-          </div>
-
-          <!-- PRO -->
-          <div class="plan-card card-pro" data-tilt>
-            <div class="plan-tag" style="background-color: var(--synth-secondary); color: #000;">MAIS VENDIDO</div>
-            
-            <div class="card-hero-visual visual-pro" aria-hidden="true">
-              <div class="visual-glow glow-pro"></div>
-              <div class="visual-3d-container">
-                <div class="css-gpu">
-                  <div class="css-gpu-fan"><div class="fan-center"></div></div>
-                  <div class="css-gpu-fan"><div class="fan-center"></div></div>
-                </div>
-              </div>
-              <div class="visual-label">GPU<br>TUNING</div>
-            </div>
-            <div class="plan-header">
-              <span class="plan-badge badge-pro">PRO</span>
-              <h3 class="plan-price">R$40</h3>
-            </div>
-            <div class="plan-expandable">
-              <p class="plan-desc">Pacote completo, otimização do windows e alinhamento das peças pronta para acabar com o lag.</p>
-            <ul class="plan-features">
-              <li>Redução de processos desnecessários</li>
-              <li>Otimização de inicialização do Windows</li>
-              <li>Redução de input Lag</li>
-              <li>Otimização básica de CPU e GPU</li>
-              <li>Configuração do painel gráfico (NVIDIA / AMD)</li>
-              <li>Ajustes básicos para melhorar estabilidade dos FPS</li>
-              <li>Remoção de arquivos e processos desnecessários</li>
-              <li>Configuração básica para reduzir stuttering</li>
-            </ul>
-            <div class="plan-expand-hint">Ver pacote completo &#9662;</div>
 </div>
-            <div class="mt-auto">
-              <button class="btn-primary btn-full" onclick="openWhats('PRO', 'R$40')" style="background-color: var(--synth-secondary); color: #000;">ESCOLHER PRO</button>
-              <div class="guarantee-badge">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+</div>
+<!-- Background WebGL -->
+<canvas aria-hidden="true" id="webgl-canvas"></canvas>
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<!-- Navbar -->
+<nav aria-label="Menu principal" class="navbar" role="navigation">
+<div class="nav-brand">
+<img alt="" aria-hidden="true" height="26" src="imagens/Favicon.png" width="26"/>
+<span>Synth Optimizer</span>
+</div>
+<div class="nav-links">
+<a href="#problema">Performance</a>
+<a href="#planos">Planos</a>
+<a href="#processo">Como Funciona</a>
+<a href="#resultados">Resultados</a>
+<a href="#faq">FAQ</a>
+</div>
+<button class="btn-nav" onclick="openWhats()">Falar no WhatsApp</button>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Abrir menu" class="mobile-menu-btn" id="mobile-menu-btn">
+<svg aria-hidden="true" fill="none" height="24" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="24"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+</button>
+</nav>
+<!-- Mobile Menu -->
+<div aria-label="Menu de navegação" class="mobile-menu" id="mobile-menu" role="dialog">
+<div class="mobile-links">
+<a href="#problema">Performance</a>
+<a href="#planos">Planos</a>
+<a href="#processo">Como Funciona</a>
+<a href="#resultados">Resultados</a>
+<a href="#faq">FAQ</a>
+</div>
+</div>
+<!-- Hero -->
+<header class="hero section">
+<div class="hero-content">
+<div class="hero-badge">OTIMIZAÇÃO PERSONALIZADA AO VIVO</div>
+<h1 class="hero-title">O SEU PC AINDA<br/><span class="highlight">TÁ TRAVANDO.</span></h1>
+<p class="hero-desc">Você tem peças boas, mas na hora do tiro o jogo engasga. O problema não é seu hardware. Nós regulamos o sistema para você jogar com o FPS cravado no talo.</p>
+<div class="hero-actions">
+<button class="btn-primary" onclick="openWhats()">OTIMIZAR MEU PC</button>
+<button class="btn-outline" onclick="scrollToId('planos')">VER PLANOS</button>
+<button class="btn-tertiary" onclick="openDiscord()">Discord</button>
+</div>
+</div>
+</header>
+<!-- Problema / O que otimiza (Bento Grid) -->
+<section aria-labelledby="problema-title" class="section bento-section" id="problema">
+<div class="section-header align-left reveal">
+<h2 class="section-title" id="problema-title">O VILÃO É O DELAY.</h2>
+<p class="section-sub">A sensação de mouse pesado não some comprando uma placa de vídeo nova. O gargalo é o Windows limitando seu PC. Nós arrancamos esse limite.</p>
+</div>
+<div class="bento-grid">
+<div class="bento-card bento-cpu" data-tilt="">
+<div class="bento-glow"></div>
+<h3>CPU, GPU E MEMÓRIA</h3>
+<p>A gente tira as amarras de energia do processador, arruma a temperatura da placa de vídeo e aperta os timings da memória RAM. O FPS sobe e o 1% low crava de vez. Acabou a travadinha no meio da trocação de tiro.</p>
+<ul class="bento-list">
+<li>Undervolt na placa de vídeo</li>
+<li>Timings apertados na RAM</li>
+<li>Processador rodando no máximo</li>
+<li>Latência miníma</li>
+<li>Painel de vídeo configurado pro competitivo</li>
+<li>Tweaks avançados no Windows 10/11</li>
+</ul>
+</div>
+<div class="bento-card bento-sys" data-tilt="">
+<h3>WINDOWS E BIOS</h3>
+<p>A gente otimiza totalmente seu windows para perfomance máxima. Toda a energia do PC vai direto pro jogo.</p>
+</div>
+<div class="bento-card bento-input" data-tilt="">
+<h3>INPUT LAG</h3>
+<p>Reduzimos atrasos de resposta do mouse, teclado e controle, ajustando o sistema para deixar seus comandos mais rápidos, consistentes e responsivos durante o jogo.</p>
+</div>
+<div class="bento-card bento-metrics" data-tilt="">
+<div aria-label="Mais de 1200 clientes satisfeitos" class="metric-big" id="counter-clients">0</div>
+<div class="metric-label">Pessoas Jogando Liso</div>
+</div>
+</div>
+</section>
+<!-- Planos -->
+<section aria-labelledby="planos-title" class="section plans-section" id="planos">
+<div class="section-header reveal">
+<div class="section-kicker">SERVIÇOS</div>
+<h2 class="section-title" id="planos-title">ATÉ ONDE VOCÊ<br/>QUER CHEGAR?</h2>
+</div>
+<div class="plans-grid">
+<!-- Console -->
+<div class="plan-card" data-tilt="">
+<div class="plan-header">
+<span class="plan-badge badge-console">CONSOLE</span>
+<h3 class="plan-price">R$20</h3>
+</div>
+<div class="plan-expand-hint"><span class="hint-desktop">Passe o mouse para ver pacote</span><span class="hint-mobile">Toque para ver pacote</span></div><div class="plan-expandable"><p class="plan-desc">Focado na galera que joga no videogame. Arrumamos a internet e o controle.</p><ul class="plan-features">
+<li>Configurações otimizadas de buff de aim assist</li>
+<li>Ajustes para mais estabilidade de FPS</li>
+<li>Delay e input lag reduzidos</li>
+<li>Console otimizado para o Fortnite</li>
+<li>Configuração completa do console</li>
+<li>Otimização do ping</li>
+</ul><div class="mt-auto">
+<button class="btn-outline btn-full" onclick="openWhats('Console', 'R$20')">ESCOLHER CONSOLE</button>
+</div></div>
+
+
+</div>
+<!-- PRO -->
+<div class="plan-card card-pro" data-tilt="">
+<div class="plan-tag" style="background-color: var(--synth-secondary); color: #000;">MAIS VENDIDO</div>
+<div aria-hidden="true" class="card-hero-visual visual-pro">
+<div class="visual-glow glow-pro"></div>
+<div class="visual-3d-container">
+<div class="css-gpu">
+<div class="css-gpu-fan"><div class="fan-center"></div></div>
+<div class="css-gpu-fan"><div class="fan-center"></div></div>
+</div>
+</div>
+<div class="visual-label">GPU<br/>TUNING</div>
+</div>
+<div class="plan-header">
+<span class="plan-badge badge-pro">PRO</span>
+<h3 class="plan-price">R$40</h3>
+</div>
+<div class="plan-expand-hint"><span class="hint-desktop">Passe o mouse para ver pacote</span><span class="hint-mobile">Toque para ver pacote</span></div><div class="plan-expandable"><p class="plan-desc">Pacote completo, otimização do windows e alinhamento das peças pronta para acabar com o lag.</p><ul class="plan-features">
+<li>Redução de processos desnecessários</li>
+<li>Otimização de inicialização do Windows</li>
+<li>Redução de input Lag</li>
+<li>Otimização básica de CPU e GPU</li>
+<li>Configuração do painel gráfico (NVIDIA / AMD)</li>
+<li>Ajustes básicos para melhorar estabilidade dos FPS</li>
+<li>Remoção de arquivos e processos desnecessários</li>
+<li>Configuração básica para reduzir stuttering</li>
+</ul><div class="mt-auto">
+<button class="btn-primary btn-full" onclick="openWhats('PRO', 'R$40')" style="background-color: var(--synth-secondary); color: #000;">ESCOLHER PRO</button>
+<div class="guarantee-badge">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 OTIMIZAÇÃO COMPLETA
               </div>
-            </div>
-          </div>
+</div></div>
 
-          <!-- ELITE -->
-          <div class="plan-card card-elite" data-tilt>
-             <div class="plan-glow-elite"></div>
-             <div class="plan-tag">MODO EXTREMO</div>
-             
-             <div class="card-hero-visual visual-elite" aria-hidden="true">
-              <div class="visual-glow glow-elite"></div>
-              <div class="visual-3d-container">
-                <div class="css-pc">
-                  <svg class="pc-lines" viewBox="0 0 90 90">
-                    <path d="M 36 31 L 36 50 L 50 50" />
-                    <path d="M 65 34 L 65 20 L 47 20" />
-                  </svg>
-                  <div class="pc-part pc-mobo"></div>
-                  <div class="pc-part pc-cpu"></div>
-                  <div class="pc-part pc-ram"></div>
-                  <div class="pc-part pc-gpu-part"></div>
-                </div>
-              </div>
-              <div class="visual-label">SYSTEM<br>OVERRIDE</div>
-            </div>
-            <div class="plan-header">
-              <span class="plan-badge badge-elite">ELITE</span>
-              <h3 class="plan-price">R$80</h3>
-            </div>
-            <div class="plan-expandable">
-              <p class="plan-desc">Tiramos tudo que o PC consegue entregar. Overclock seguro e modificações profundas.</p>
-            <ul class="plan-features">
-              <li>Instalação de Windows mais leve e otimizado</li>
-              <li>Otimização profunda da CPU e GPU</li>
-              <li>Ajustes Zero Delay (USB, teclado, mouse e controle)</li>
-              <li>Tweaks avançados no Windows 10/11</li>
-              <li>Overclock na placa de vídeo + CURVA DE FANS</li>
-              <li>Configuração do Fortnite/jogo escolhido</li>
-              <li>Latência do sistema em 0.500</li>
-              <li>Redução avançada de ping</li>
-              <li>Configuração de internet otimizada</li>
-              <li>Ajustes avançados no jogo escolhido</li>
-              <li>Otimização técnica na BIOS</li>
-              <li>Configuração do Discord (menor consumo)</li>
-              <li>Configuração do Spotify (menor consumo)</li>
-            </ul>
-            <div class="plan-expand-hint">Ver pacote completo &#9662;</div>
+
 </div>
-            <div class="mt-auto">
-              <button class="btn-outline btn-full" onclick="openWhats('ELITE', 'R$80')">ESCOLHER ELITE</button>
-              <div class="guarantee-badge">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+<!-- ELITE -->
+<div class="plan-card card-elite" data-tilt="">
+<div class="plan-glow-elite"></div>
+<div class="plan-tag">MODO EXTREMO</div>
+<div aria-hidden="true" class="card-hero-visual visual-elite">
+<div class="visual-glow glow-elite"></div>
+<div class="visual-3d-container">
+<div class="css-pc">
+<svg class="pc-lines" viewbox="0 0 90 90">
+<path d="M 36 31 L 36 50 L 50 50"></path>
+<path d="M 65 34 L 65 20 L 47 20"></path>
+</svg>
+<div class="pc-part pc-mobo"></div>
+<div class="pc-part pc-cpu"></div>
+<div class="pc-part pc-ram"></div>
+<div class="pc-part pc-gpu-part"></div>
+</div>
+</div>
+<div class="visual-label">SYSTEM<br/>OVERRIDE</div>
+</div>
+<div class="plan-header">
+<span class="plan-badge badge-elite">ELITE</span>
+<h3 class="plan-price">R$80</h3>
+</div>
+<div class="plan-expand-hint"><span class="hint-desktop">Passe o mouse para ver pacote</span><span class="hint-mobile">Toque para ver pacote</span></div><div class="plan-expandable"><p class="plan-desc">Tiramos tudo que o PC consegue entregar. Overclock seguro e modificações profundas.</p><ul class="plan-features">
+<li>Instalação de Windows mais leve e otimizado</li>
+<li>Otimização profunda da CPU e GPU</li>
+<li>Ajustes Zero Delay (USB, teclado, mouse e controle)</li>
+<li>Tweaks avançados no Windows 10/11</li>
+<li>Overclock na placa de vídeo + CURVA DE FANS</li>
+<li>Configuração do Fortnite/jogo escolhido</li>
+<li>Latência do sistema em 0.500</li>
+<li>Redução avançada de ping</li>
+<li>Configuração de internet otimizada</li>
+<li>Ajustes avançados no jogo escolhido</li>
+<li>Otimização técnica na BIOS</li>
+<li>Configuração do Discord (menor consumo)</li>
+<li>Configuração do Spotify (menor consumo)</li>
+</ul><div class="mt-auto">
+<button class="btn-outline btn-full" onclick="openWhats('ELITE', 'R$80')">ESCOLHER ELITE</button>
+<div class="guarantee-badge">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
                 Otimização definitiva
               </div>
-            </div>
-          </div>
+</div></div>
 
-        </div>
-      </section>
 
-      <!-- Pipeline (Como Funciona) -->
-      <section id="processo" class="section pipeline-section" aria-labelledby="processo-title">
-         <div class="section-header align-left reveal">
-          <h2 class="section-title" id="processo-title">O PASSO A PASSO.</h2>
-          <p class="section-sub">Você não precisa entender de informática. Nós fazemos tudo por você.</p>
-        </div>
-        <div class="pipeline-container">
-           <div class="pipeline-track" aria-hidden="true">
-             <div class="pipeline-progress" id="pipe-progress"></div>
-           </div>
-           <div class="pipeline-steps">
-             <div class="pipe-step">
-               <div class="pipe-dot" aria-hidden="true"></div>
-               <div class="pipe-content">
-                 <h4>1. MENSAGEM</h4>
-                 <p>Para começar seu atendimento fazemos uma análise antes de otimizar para decidir qual plano é o melhor para vc.</p>
-               </div>
-             </div>
-             <div class="pipe-step">
-               <div class="pipe-dot" aria-hidden="true"></div>
-               <div class="pipe-content">
-                 <h4>2. AGENDAMENTO</h4>
-                 <p>Marcamos um horário na agenda. Normalmente dá para atender no mesmo dia.</p>
-               </div>
-             </div>
-             <div class="pipe-step">
-               <div class="pipe-dot" aria-hidden="true"></div>
-               <div class="pipe-content">
-                 <h4>3. ACESSO</h4>
-                 <p>Você baixa o programa AnyDesk e passa o código da tela pra gente.</p>
-               </div>
-             </div>
-             <div class="pipe-step">
-               <div class="pipe-dot" aria-hidden="true"></div>
-               <div class="pipe-content">
-                 <h4>4. TRABALHO</h4>
-                 <p>A otimização é feita em torno de 30 minutos a 1 hora.</p>
-               </div>
-             </div>
-             <div class="pipe-step">
-               <div class="pipe-dot" aria-hidden="true"></div>
-               <div class="pipe-content">
-                 <h4>5. TESTE</h4>
-                 <p>A gente fecha o programa. Você abre o seu jogo e testa na mesma hora.</p>
-               </div>
-             </div>
-           </div>
-        </div>
-      </section>
-
-      <!-- Trust -->
-      <section class="section trust-section" aria-label="Transparência e segurança">
-        <div class="trust-bento">
-           <div class="trust-card large" data-tilt>
-             <h2>A TELA É<br>TODA SUA.</h2>
-             <p>A gente mexe no seu PC enquanto você assiste. Nós explicamos cada clique e zero coisas ficam escondidas.</p>
-           </div>
-           <div class="trust-card" data-tilt>
-             <h3>SEUS ARQUIVOS<br>FICAM AÍ.</h3>
-             <p>Ninguém vai desinstalar seus jogos ou apagar pastas. O foco é só arrancar o lixo acumulado no sistema.</p>
-           </div>
-           <div class="trust-card" data-tilt>
-             <h3>SUPORTE DE<br>VERDADE.</h3>
-             <p>O jogo fechou do nada? O PC ficou estranho? É só chamar no WhatsApp. A gente conecta de novo e resolve na hora.</p>
-           </div>
-        </div>
-      </section>
-
-      <!-- Resultados -->
-      <section id="resultados" class="section results-section" aria-labelledby="resultados-title">
-        <div class="section-header reveal">
-          <h2 class="section-title" id="resultados-title">QUEM JÁ FEZ.</h2>
-          <p class="section-sub">Prints reais da galera que otimizou a máquina com a gente nos últimos dias.</p>
-        </div>
-        <div class="wall-of-results" id="wall-of-results">
-           <!-- Injetado via JS -->
-        </div>
-      </section>
-
-      <!-- FAQ -->
-      <section id="faq" class="section faq-section" aria-labelledby="faq-title">
-        <div class="section-header reveal">
-          <h2 class="section-title" id="faq-title">DÚVIDAS COMUNS.</h2>
-        </div>
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">Isso estraga as peças do PC? <span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" role="region"><p>Não! A otimização visa deixar seu pc no máximo sem estragar nenhuma peça, tirando o máximo de delay e do input lag, e subir seu fps.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">Vou ter que formatar o Windows? <span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" role="region"><p>A formatação é recomendada mas não obrigatória. Recomendamos sempre formatar o pc antes de otimizar para ter ganhos mais expressivos.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">Apagam meus jogos ou fotos? <span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" role="region"><p>Suas coisas continuam intactas. Ninguém encosta nas suas fotos. Mexemos apenas na energia e nos registros invisíveis.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">Quantos FPS eu vou ganhar? <span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" role="region"><p>Não dá para ter uma estimativa de quantos FPS irá fazer, os ganhos de desempenho variam de pc para pc.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">Dá para otimizar notebook? <span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" role="region"><p>Com certeza. O notebook vem de fábrica segurando o processador para a bateria durar mais. A gente solta esse freio sem estragar nada.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">Devolvem o dinheiro se ficar ruim? <span class="faq-icon" aria-hidden="true">+</span></button>
-            <div class="faq-a" role="region"><p>Você paga no início da otimização. E como é um trabalho manual e que demanda tempo de serviço e conhecimento, não temos reembolso. Porém refazemos tudo de graça caso haja algum problema!</p></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CTA Final -->
-      <section class="section final-cta" aria-label="Chamada para ação">
-        <div class="cta-glow" aria-hidden="true"></div>
-        <h2 class="cta-title">CHEGA DE PASSAR<br>RAIVA COM O LAG.</h2>
-        <div class="cta-actions">
-           <div class="cta-buttons">
-             <button class="btn-primary btn-large" onclick="openWhats()">OTIMIZAR MEU PC</button>
-             <button class="btn-tertiary" onclick="openDiscord()">Entrar no Discord</button>
-           </div>
-           <div class="cta-social-proof">
-             <div class="avatar-group" aria-hidden="true">
-               <img src="imagens/Cliente1.jpeg" alt="" loading="lazy">
-               <img src="imagens/Cliente2.jpeg" alt="" loading="lazy">
-               <img src="imagens/Cliente3.jpeg" alt="" loading="lazy">
-               <img src="imagens/Cliente4.jpeg" alt="" loading="lazy">
-             </div>
-             <div class="social-proof-text">
+</div>
+</div>
+</section>
+<!-- Pipeline (Como Funciona) -->
+<section aria-labelledby="processo-title" class="section pipeline-section" id="processo">
+<div class="section-header align-left reveal">
+<h2 class="section-title" id="processo-title">O PASSO A PASSO.</h2>
+<p class="section-sub">Você não precisa entender de informática. Nós fazemos tudo por você.</p>
+</div>
+<div class="pipeline-container">
+<div aria-hidden="true" class="pipeline-track">
+<div class="pipeline-progress" id="pipe-progress"></div>
+</div>
+<div class="pipeline-steps">
+<div class="pipe-step">
+<div aria-hidden="true" class="pipe-dot"></div>
+<div class="pipe-content">
+<h4>1. MENSAGEM</h4>
+<p>Para começar seu atendimento fazemos uma análise antes de otimizar para decidir qual plano é o melhor para vc.</p>
+</div>
+</div>
+<div class="pipe-step">
+<div aria-hidden="true" class="pipe-dot"></div>
+<div class="pipe-content">
+<h4>2. AGENDAMENTO</h4>
+<p>Marcamos um horário na agenda. Normalmente dá para atender no mesmo dia.</p>
+</div>
+</div>
+<div class="pipe-step">
+<div aria-hidden="true" class="pipe-dot"></div>
+<div class="pipe-content">
+<h4>3. ACESSO</h4>
+<p>Você baixa o programa AnyDesk e passa o código da tela pra gente.</p>
+</div>
+</div>
+<div class="pipe-step">
+<div aria-hidden="true" class="pipe-dot"></div>
+<div class="pipe-content">
+<h4>4. TRABALHO</h4>
+<p>A otimização é feita em torno de 30 minutos a 1 hora.</p>
+</div>
+</div>
+<div class="pipe-step">
+<div aria-hidden="true" class="pipe-dot"></div>
+<div class="pipe-content">
+<h4>5. TESTE</h4>
+<p>A gente fecha o programa. Você abre o seu jogo e testa na mesma hora.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Trust -->
+<section aria-label="Transparência e segurança" class="section trust-section">
+<div class="trust-bento">
+<div class="trust-card large" data-tilt="">
+<h2>A TELA É<br/>TODA SUA.</h2>
+<p>A gente mexe no seu PC enquanto você assiste. Nós explicamos cada clique e zero coisas ficam escondidas.</p>
+</div>
+<div class="trust-card" data-tilt="">
+<h3>SEUS ARQUIVOS<br/>FICAM AÍ.</h3>
+<p>Ninguém vai desinstalar seus jogos ou apagar pastas. O foco é só arrancar o lixo acumulado no sistema.</p>
+</div>
+<div class="trust-card" data-tilt="">
+<h3>SUPORTE DE<br/>VERDADE.</h3>
+<p>O jogo fechou do nada? O PC ficou estranho? É só chamar no WhatsApp. A gente conecta de novo e resolve na hora.</p>
+</div>
+</div>
+</section>
+<!-- Resultados -->
+<section aria-labelledby="resultados-title" class="section results-section" id="resultados">
+<div class="section-header reveal">
+<h2 class="section-title" id="resultados-title">QUEM JÁ FEZ.</h2>
+<p class="section-sub">Prints reais da galera que otimizou a máquina com a gente nos últimos dias.</p>
+</div>
+<div class="wall-of-results" id="wall-of-results">
+<!-- Injetado via JS -->
+</div>
+</section>
+<!-- FAQ -->
+<section aria-labelledby="faq-title" class="section faq-section" id="faq">
+<div class="section-header reveal">
+<h2 class="section-title" id="faq-title">DÚVIDAS COMUNS.</h2>
+</div>
+<div class="faq-list">
+<div class="faq-item">
+<button aria-expanded="false" class="faq-q">Isso estraga as peças do PC? <span aria-hidden="true" class="faq-icon">+</span></button>
+<div class="faq-a" role="region"><p>Não! A otimização visa deixar seu pc no máximo sem estragar nenhuma peça, tirando o máximo de delay e do input lag, e subir seu fps.</p></div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-q">Vou ter que formatar o Windows? <span aria-hidden="true" class="faq-icon">+</span></button>
+<div class="faq-a" role="region"><p>A formatação é recomendada mas não obrigatória. Recomendamos sempre formatar o pc antes de otimizar para ter ganhos mais expressivos.</p></div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-q">Apagam meus jogos ou fotos? <span aria-hidden="true" class="faq-icon">+</span></button>
+<div class="faq-a" role="region"><p>Suas coisas continuam intactas. Ninguém encosta nas suas fotos. Mexemos apenas na energia e nos registros invisíveis.</p></div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-q">Quantos FPS eu vou ganhar? <span aria-hidden="true" class="faq-icon">+</span></button>
+<div class="faq-a" role="region"><p>Não dá para ter uma estimativa de quantos FPS irá fazer, os ganhos de desempenho variam de pc para pc.</p></div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-q">Dá para otimizar notebook? <span aria-hidden="true" class="faq-icon">+</span></button>
+<div class="faq-a" role="region"><p>Com certeza. O notebook vem de fábrica segurando o processador para a bateria durar mais. A gente solta esse freio sem estragar nada.</p></div>
+</div>
+<div class="faq-item">
+<button aria-expanded="false" class="faq-q">Devolvem o dinheiro se ficar ruim? <span aria-hidden="true" class="faq-icon">+</span></button>
+<div class="faq-a" role="region"><p>Você paga no início da otimização. E como é um trabalho manual e que demanda tempo de serviço e conhecimento, não temos reembolso. Porém refazemos tudo de graça caso haja algum problema!</p></div>
+</div>
+</div>
+</section>
+<!-- CTA Final -->
+<section aria-label="Chamada para ação" class="section final-cta">
+<div aria-hidden="true" class="cta-glow"></div>
+<h2 class="cta-title">CHEGA DE PASSAR<br/>RAIVA COM O LAG.</h2>
+<div class="cta-actions">
+<div class="cta-buttons">
+<button class="btn-primary btn-large" onclick="openWhats()">OTIMIZAR MEU PC</button>
+<button class="btn-tertiary" onclick="openDiscord()">Entrar no Discord</button>
+</div>
+<div class="cta-social-proof">
+<div aria-hidden="true" class="avatar-group">
+<img alt="" loading="lazy" src="imagens/Cliente1.jpeg"/>
+<img alt="" loading="lazy" src="imagens/Cliente2.jpeg"/>
+<img alt="" loading="lazy" src="imagens/Cliente3.jpeg"/>
+<img alt="" loading="lazy" src="imagens/Cliente4.jpeg"/>
+</div>
+<div class="social-proof-text">
                Junte-se a <span>+1200 gamers</span> jogando liso.
              </div>
-           </div>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="footer-content">
-          <div class="footer-brand">
-            <img src="imagens/Favicon.png" alt="" width="22" height="22" aria-hidden="true">
-            <span>Synth Optimizer</span>
-          </div>
-          <div class="footer-links">
-            <a href="javascript:void(0)" onclick="openWhats()">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="footer-icon"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.137 1.535 5.872L.057 23.215a.75.75 0 0 0 .916.938l5.492-1.436A11.928 11.928 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 0 1-4.951-1.354l-.356-.211-3.681.963.984-3.587-.232-.369A9.705 9.705 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-              <span>WhatsApp</span>
-            </a>
-            <a href="javascript:void(0)" onclick="openDiscord()">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="footer-icon"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>
-              <span>Discord</span>
-            </a>
-            <a href="https://www.instagram.com/synth_optimizer/" target="_blank" rel="noopener noreferrer">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="footer-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-              <span>Instagram</span>
-            </a>
-          </div>
-        </div>
-        <div class="footer-copy">© 2026 Synth Optimizer. Todos os direitos reservados.</div>
-      </footer>
-
-    </div>
-  </div>
-
-  <button class="float-whats" onclick="openWhats()" aria-label="Abrir conversa no WhatsApp">
-     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.137 1.535 5.872L.057 23.215a.75.75 0 0 0 .916.938l5.492-1.436A11.928 11.928 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 0 1-4.951-1.354l-.356-.211-3.681.963.984-3.587-.232-.369A9.705 9.705 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
-  </button>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-label="Visualizar resultado" aria-hidden="true">
-    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Fechar visualização">✕</button>
-    <img id="lightbox-img" src="" alt="Resultado de otimização">
-  </div>
-
-  <!-- CDN scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <script src="script.js"></script>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="footer">
+<div class="footer-content">
+<div class="footer-brand">
+<img alt="" aria-hidden="true" height="22" src="imagens/Favicon.png" width="22"/>
+<span>Synth Optimizer</span>
+</div>
+<div class="footer-links">
+<a href="javascript:void(0)" onclick="openWhats()">
+<svg aria-hidden="true" class="footer-icon" fill="currentColor" height="24" viewbox="0 0 24 24" width="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.137 1.535 5.872L.057 23.215a.75.75 0 0 0 .916.938l5.492-1.436A11.928 11.928 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 0 1-4.951-1.354l-.356-.211-3.681.963.984-3.587-.232-.369A9.705 9.705 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"></path></svg>
+<span>WhatsApp</span>
+</a>
+<a href="javascript:void(0)" onclick="openDiscord()">
+<svg aria-hidden="true" class="footer-icon" fill="currentColor" height="24" viewbox="0 0 24 24" width="24"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"></path></svg>
+<span>Discord</span>
+</a>
+<a href="https://www.instagram.com/synth_optimizer/" rel="noopener noreferrer" target="_blank">
+<svg class="footer-icon" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24"><rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg>
+<span>Instagram</span>
+</a>
+</div>
+</div>
+<div class="footer-copy">© 2026 Synth Optimizer. Todos os direitos reservados.</div>
+</footer>
+</div>
+</div>
+<button aria-label="Abrir conversa no WhatsApp" class="float-whats" onclick="openWhats()">
+<svg aria-hidden="true" fill="currentColor" height="24" viewbox="0 0 24 24" width="24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"></path><path d="M12 0C5.373 0 0 5.373 0 12c0 2.135.561 4.137 1.535 5.872L.057 23.215a.75.75 0 0 0 .916.938l5.492-1.436A11.928 11.928 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.713 9.713 0 0 1-4.951-1.354l-.356-.211-3.681.963.984-3.587-.232-.369A9.705 9.705 0 0 1 2.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"></path></svg>
+</button>
+<!-- Lightbox -->
+<div aria-hidden="true" aria-label="Visualizar resultado" class="lightbox" id="lightbox" role="dialog">
+<button aria-label="Fechar visualização" class="lightbox-close" onclick="closeLightbox()">✕</button>
+<img alt="Resultado de otimização" id="lightbox-img" src=""/>
+</div>
+<!-- CDN scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
