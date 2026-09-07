@@ -553,7 +553,7 @@ if (is3DEnabled) {
     gpuGroup.add(gpuBody);
     gpuGroup.position.set(0, 3, -6); // Start middle-top
     gpuGroup.rotation.set(0.3, -0.6, -0.1);
-    gpuGroup.userData = { floatOffset: 4, speed: 0.015 }; // Fans don't spin, but the whole GPU spins? Wait, let's make the fans spin!
+    gpuGroup.userData = { floatOffset: 4, speed: 0.005 }; // Reduced from 0.015
 
     hwGroup.add(cpuGroup, ramGroup, gpuGroup);
     scene.add(hwGroup);
@@ -606,13 +606,13 @@ if (is3DEnabled) {
       // Hardware Floating & Spinning
       hwGroup.children.forEach(child => {
         child.rotation.y += child.userData.speed;
-        child.position.y += Math.sin(elapsedTime * 2 + child.userData.floatOffset) * 0.005;
+        child.position.y += Math.sin(elapsedTime * 2 + child.userData.floatOffset) * 0.003; // Reduced float amplitude
         
         // If this is the GPU, spin its fans
         if (child === gpuGroup) {
           child.children.forEach(c => {
             if (c.name === 'fan') {
-              c.rotation.y += 0.1; // Fans spin fast!
+              c.rotation.y += 0.04; // Reduced fan speed
             }
           });
         }
@@ -636,25 +636,25 @@ if (is3DEnabled) {
           const p = self.progress; // 0 to 1 across the whole page
 
           // Synth Wave flattens out slightly as you scroll down
-          waveParams.amplitude = 2.0 - (p * 1.0);
+          waveParams.amplitude = 2.0 - (p * 0.8);
           
           // CPU floats slowly from top-right down to bottom-left
-          cpuGroup.position.x = 4 - (p * 8);
-          cpuGroup.position.y = 1 + (p * 3); 
-          cpuGroup.position.z = -3 + (p * 1);
-          cpuGroup.rotation.z = p * 2; 
+          cpuGroup.position.x = 4 - (p * 4);
+          cpuGroup.position.y = 1 + (p * 1.5); 
+          cpuGroup.position.z = -3 + (p * 0.5);
+          cpuGroup.rotation.z = p * 1.0; 
           
           // RAM floats from top-left, crosses screen, to bottom-right
-          ramGroup.position.x = -4 + (p * 8);
-          ramGroup.position.y = -1 - (p * 2);
-          ramGroup.position.z = -4 + (p * 2);
-          ramGroup.rotation.x = -0.2 + (p * 1.5);
+          ramGroup.position.x = -4 + (p * 4);
+          ramGroup.position.y = -1 - (p * 1);
+          ramGroup.position.z = -4 + (p * 1);
+          ramGroup.rotation.x = -0.2 + (p * 0.8);
           
           // GPU is right in the middle, drops down
-          gpuGroup.position.x = 0 - (p * 6);
-          gpuGroup.position.y = 3 - (p * 8); 
-          gpuGroup.position.z = -6 + (p * 3);
-          gpuGroup.rotation.z = -p * 1.5;
+          gpuGroup.position.x = 0 - (p * 3);
+          gpuGroup.position.y = 3 - (p * 4); 
+          gpuGroup.position.z = -6 + (p * 1.5);
+          gpuGroup.rotation.z = -p * 0.8;
         }
       });
 
