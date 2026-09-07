@@ -599,50 +599,39 @@ if (is3DEnabled) {
     // --- ScrollTrigger for 3D Storytelling ---
     if (typeof ScrollTrigger !== 'undefined') {
       
-      // 1. Hero -> Bento (CPU and RAM come to focus)
+      // Continuous Parallax Tracking for all hardware across the entire page
       ScrollTrigger.create({
-        trigger: ".bento-section",
-        start: "top bottom",
-        end: "center center",
-        scrub: 1.2,
+        trigger: "body",
+        start: "top top",
+        end: "bottom bottom",
+        scrub: 1.5, // Super smooth scrubbing
         onUpdate: (self) => {
-          const p = self.progress;
-          waveParams.amplitude = 2.0 - (p * 1.5);
+          const p = self.progress; // 0 to 1 across the whole page
+
+          // Synth Wave flattens out slightly as you scroll down
+          waveParams.amplitude = 2.0 - (p * 1.0);
           
-          // CPU moves to the left background
-          cpuGroup.position.x = 4 - (p * 8);
-          cpuGroup.position.z = -3 + (p * 1);
+          // CPU floats slowly from top-right down to bottom-left
+          cpuGroup.position.x = 4 - (p * 10);
+          cpuGroup.position.y = -1 + (p * 3); // Moves slightly up in world space to counter scroll? No, let it drift down
+          cpuGroup.position.z = -3 + (p * 2);
+          cpuGroup.rotation.z = p * 2; // Extra spin based on scroll
           
-          // RAM moves to the right background
-          ramGroup.position.x = -5 + (p * 9);
-          ramGroup.position.y = 2 - (p * 2);
+          // RAM floats from top-left, crosses screen, to bottom-right
+          ramGroup.position.x = -5 + (p * 12);
+          ramGroup.position.y = 2 - (p * 4);
+          ramGroup.position.z = -5 + (p * 3);
+          ramGroup.rotation.x = -0.2 + (p * 1.5);
           
-          // GPU moves up and away
-          gpuGroup.position.y = 4 + (p * 5);
+          // GPU starts hidden up top, drops into center focus, then exits left
+          gpuGroup.position.x = 6 - (p * 12);
+          gpuGroup.position.y = 7 - (p * 9); 
+          gpuGroup.position.z = -8 + (p * 5);
+          gpuGroup.rotation.z = -p * 1.5;
         }
       });
 
-      // 2. Bento -> Plans (GPU comes to focus)
-      ScrollTrigger.create({
-        trigger: ".plans-section",
-        start: "top bottom",
-        end: "center center",
-        scrub: 1.2,
-        onUpdate: (self) => {
-          const p = self.progress;
-          
-          // GPU swoops into view behind the Elite plan
-          gpuGroup.position.x = 6 - (p * 4.5);
-          gpuGroup.position.y = 9 - (p * 8.5);
-          gpuGroup.position.z = -8 + (p * 3);
-          
-          // CPU and RAM drop out of frame
-          cpuGroup.position.y = -1 - (p * 8);
-          ramGroup.position.y = 0 - (p * 8);
-        }
-      });
-
-      // 3. Elite Plan Color Shift
+      // Elite Plan Color Shift (Keep this localized)
       ScrollTrigger.create({
         trigger: ".card-elite",
         start: "top center",
